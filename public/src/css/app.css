@@ -1,0 +1,90 @@
+.welcomeTitle{
+    font-size:40px;
+    text-align: center;
+    color: #eeeeee;
+    font-family: "Bookman Old Style";
+    font-weight: bolder;
+    text-shadow: 2px 2px 8px #0e0e0e;
+}
+
+.titleContainer{
+    height: 185px;
+    width: 530px;
+    margin: 20px auto;
+    background:transparent;
+    padding: inherit;
+
+    -webkit-box-shadow:0px 0px 100px #0e0e0e;
+    -moz-box-shadow: 0px 100px 100px #0e0e0e;
+    box-shadow: 0px 0px 100px #0e0e0e;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+
+    border: 8px solid transparent;
+}
+
+.buttonalign{
+    position: relative;
+    right: -140px;
+}
+
+.signIn{
+    position: relative;
+    top: 100px;
+}
+
+.loginLabels{
+    font-size: 16px;
+    text-shadow:#b3b3b3 2px 2px 4px;
+}
+
+#loginP{
+    position: relative;
+    font-size: 13px;
+    right: -100px;
+    font-weight:bold;
+    top: 30px;
+}
+
+.loginAlternative{
+    position: relative;
+    font-size: 14px;
+    right: -50px;
+    font-weight:bold;
+    top: 30px;
+}
+
+.signupbtn{
+    position: relative;
+    top:30px;
+    right: -200px;
+    border: solid;
+    border-color: #387038;
+}
+
+.signupcontainer{
+
+    position: relative;
+    height: 550px;
+    width: 550px;
+    margin: 1px auto;
+    background:transparent;
+    padding: inherit;
+
+    -webkit-box-shadow:0px 0px 100px #0e0e0e;
+    -moz-box-shadow: 0px 100px 100px #0e0e0e;
+    box-shadow: 0px 0px 100px #0e0e0e;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+
+    border: 8px solid transparent;
+}
+
+.labelFonts{
+    font-size: 16px;
+    text-shadow:#b3b3b3 1px 1px 3px;
+}
