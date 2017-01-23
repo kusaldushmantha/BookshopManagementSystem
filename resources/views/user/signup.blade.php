@@ -52,15 +52,23 @@
                     <label for="contactNo" class="labelFonts">Contact No :</label>
                     <input type="text" name="contactno" id="contactno" class="form-control">
                 </div>
-                {{csrf_field()}}
+                <div class="form-group">
+                    <label for="accesslevel" class="labelFonts">Access Level :</label>
+                    &nbsp;&nbsp;
+                    <input  class="labelFonts" type="radio" name="accesslevel" id="customeraccess" value="customer" checked>
+                    <strong>Customer</strong>
+                    &nbsp;&nbsp;&nbsp;
+                    <input class="labelFonts" type="radio" name="accesslevel" id="adminaccess" value="admin">
+                    <strong>Administrator</strong>
+                </div>
                 <div class="clearfix" class="labelFonts">
                     <button type="submit" class="btn btn-success signupbtn">Create Account</button>
                 </div>
+                {{csrf_field()}}
             </form>
         </div>
     </div>
     </div>
-
 
 @endsection
 

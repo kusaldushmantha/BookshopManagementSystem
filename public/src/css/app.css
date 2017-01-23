@@ -67,7 +67,7 @@
 .signupcontainer{
 
     position: relative;
-    height: 550px;
+    height: 600px;
     width: 550px;
     margin: 1px auto;
     background:transparent;
@@ -85,6 +85,42 @@
 }
 
 .labelFonts{
+    font-size: 16px;
+    text-shadow:#b3b3b3 1px 1px 3px;
+}
+
+.addBookBtn{
+    position: relative;
+    right: -140px;
+    top: auto;
+    border: solid;
+    border-color: #387038;
+}
+
+.addbookcontainer{
+
+    height: 400px;
+    width: 400px;
+    margin: 1px auto;
+    background:transparent;
+
+    -webkit-box-shadow:0px 0px 100px #0e0e0e;
+    -moz-box-shadow: 0px 100px 100px #0e0e0e;
+    box-shadow: 0px 0px 100px #0e0e0e;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+
+    border: 8px solid transparent;
+}
+
+.addbookrow{
+    position: relative;
+    top: 50px;
+}
+
+.addbooklabel{
     font-size: 16px;
     text-shadow:#b3b3b3 1px 1px 3px;
 }

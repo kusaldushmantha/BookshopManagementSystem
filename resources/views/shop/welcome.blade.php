@@ -31,6 +31,7 @@
                 <div class="buttonalign">
                     <button type="submit" class="btn btn-primary">Sign In</button>
                 </div>
+                {{ csrf_field() }}
             </form>
             <p>  </p>
             <p id="loginP">
