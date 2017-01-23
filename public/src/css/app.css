@@ -59,7 +59,7 @@
 .signupbtn{
     position: relative;
     top:30px;
-    right: -200px;
+    right: -180px;
     border: solid;
     border-color: #387038;
 }
@@ -67,9 +67,9 @@
 .signupcontainer{
 
     position: relative;
-    height: 600px;
+    height: 700px;
     width: 550px;
-    margin: 1px auto;
+    margin: 2px auto;
     background:transparent;
     padding: inherit;
 

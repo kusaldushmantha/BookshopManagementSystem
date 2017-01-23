@@ -38,7 +38,7 @@
                 Don't have an Account Yet?
             </p>
             <div class="loginAlternative">
-                <a href="#" class="createAccountLogin">Create an Account </a>
+                <a href="{{ route('signup') }}" class="createAccountLogin">Create an Account </a>
                 &nbsp;&nbsp;
                 <a href="#" class="createAccountLogin">Browse Books only</a>
             </div>

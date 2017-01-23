@@ -11,14 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('shop.welcome');
-});
+Route::get('/signin', [
+    'uses'=>'UserController@getSignin',
+    'as'=>'signin'
+]);
 
-Route::get('/signup',function (){
-    return view('user.signup');
-});
+Route::get('/signup',[
+    'uses'=>'UserController@getSignup',
+    'as'=>'signup'
+]);
 
-Route::get('/addbook',function (){
-    return view('shop.addbook');
-});
+Route::post('/signup',[
+    'uses'=>'UserController@postSignup',
+    'as'=>'postsignup'
+]);
+
+Route::get('/addbook',[
+    'uses'=>'UserController@getAddBook',
+    'as'=>'addbook'
+]);

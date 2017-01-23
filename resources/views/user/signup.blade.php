@@ -5,7 +5,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
             </div>
         </div>
     </nav>
@@ -17,7 +17,7 @@
         body{
             background-image: url('src/img/bookstackreOp.jpg');
             background-repeat: no-repeat;
-            background-size:1400px 650px;
+            background-size:1400px 1000px;
             background-opacity:0.5;
         }
     </style>
@@ -27,7 +27,16 @@
     <div class="container ">
     <div class="row" >
         <div class="signupcontainer">
-            <form action="#" method="post" id="signinForm">
+
+            @if(count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $recievedError)
+                        <p>{{$recievedError}}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <form action="{{ route('postsignup') }}" method="post" id="signupForm">
                 <div class="form-group">
                     <label for="Firstname" class="labelFonts">Firstname : </label>
                     <input type="text" name="firstname" id="firstname" class="form-control">
@@ -46,23 +55,23 @@
                 </div>
                 <div class="form-group">
                     <label for="password" class="labelFonts">Confirm Password :</label>
-                    <input type="password" name="confirmpassword" id="confirmpassword" class="form-control">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="contactNo" class="labelFonts">Contact No :</label>
+                    <label for="contactno" class="labelFonts">Contact No :</label>
                     <input type="text" name="contactno" id="contactno" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="accesslevel" class="labelFonts">Access Level :</label>
                     &nbsp;&nbsp;
-                    <input  class="labelFonts" type="radio" name="accesslevel" id="customeraccess" value="customer" checked>
+                    <input  class="labelFonts" type="radio" name="accesslevel" value="customer" checked>
                     <strong>Customer</strong>
                     &nbsp;&nbsp;&nbsp;
-                    <input class="labelFonts" type="radio" name="accesslevel" id="adminaccess" value="admin">
+                    <input class="labelFonts" type="radio" name="accesslevel" value="admin">
                     <strong>Administrator</strong>
                 </div>
                 <div class="clearfix" class="labelFonts">
-                    <button type="submit" class="btn btn-success signupbtn">Create Account</button>
+                    <button type="submit" class="btn btn-success signupbtn" id="btnSubmit">Create Account</button>
                 </div>
                 {{csrf_field()}}
             </form>
