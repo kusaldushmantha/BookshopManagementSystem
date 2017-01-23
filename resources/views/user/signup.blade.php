@@ -5,7 +5,8 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true">
+                    </i> TreeHouse Books</a>
             </div>
         </div>
     </nav>
@@ -36,30 +37,30 @@
                 </div>
             @endif
 
-            <form action="{{ route('postsignup') }}" method="post" id="signupForm">
+            <form action="{{ route('postsignup') }}" method="post" id="signupForm" name="signupForm">
                 <div class="form-group">
                     <label for="Firstname" class="labelFonts">Firstname : </label>
-                    <input type="text" name="firstname" id="firstname" class="form-control">
+                    <input type="text" name="firstname" id="firstname" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="Lastname" class="labelFonts">Lastname : </label>
-                    <input type="text" name="lastname" id="lastname" class="form-control">
+                    <input type="text" name="lastname" id="lastname" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="Username" class="labelFonts">Username : </label>
-                    <input type="text" name="username" id="username" class="form-control">
+                    <input type="text" name="username" id="username" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="labelFonts">Password :</label>
-                    <input type="password" name="password" id="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="labelFonts">Confirm Password :</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="contactno" class="labelFonts">Contact No :</label>
-                    <input type="text" name="contactno" id="contactno" class="form-control">
+                    <input type="text" name="contactno" id="contactno" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="accesslevel" class="labelFonts">Access Level :</label>
@@ -71,7 +72,9 @@
                     <strong>Administrator</strong>
                 </div>
                 <div class="clearfix" class="labelFonts">
-                    <button type="submit" class="btn btn-success signupbtn" id="btnSubmit">Create Account</button>
+                    <button type="submit" class="btn btn-success signupbtn" id="btnSubmit"
+                    onclick="validateNumbers(contactno),validateLetters(firstname),validateLetters(lastname)">
+                        Create Account</button>
                 </div>
                 {{csrf_field()}}
             </form>
@@ -81,4 +84,27 @@
 
 @endsection
 
-
+@section('scripts')
+     <script type="text/javascript">
+        function validateNumbers(inputnum) {
+            var num = /^[0-9]+$/;
+            if(inputnum.value.match(num) || inputnum.value=='')
+                return true;
+            else{
+                alert("Please Enter Numeric Characters Only");
+                inputnum.value='';
+                return false;
+            }
+        }
+        function validateLetters(inputnum) {
+            var letters = /^[A-Za-z]+$/;
+            if(inputnum.value.match(letters) || inputnum.value=='')
+                return true;
+            else{
+                alert("Please Enter Alphabetic Characters Only");
+                inputnum.value='';
+                return false;
+            }
+        }
+    </script>
+@endsection
