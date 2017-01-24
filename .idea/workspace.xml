@@ -4,23 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/resources/views/user/signin.blade.php" line="15" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="309bc0bd-e809-4fd0-8fcc-40d2e475043d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/user/admindash.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/blankBook.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/books.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/bookshop.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/reading.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/reading_quote1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/reading_quote2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/src/img/reality.jpg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/shop/welcome.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/signin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ShopController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ShopController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/css/app.css" afterPath="$PROJECT_DIR$/public/src/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/shop/addbook.blade.php" afterPath="$PROJECT_DIR$/resources/views/shop/addbook.blade.php" />
-    </list>
+    <list default="true" id="309bc0bd-e809-4fd0-8fcc-40d2e475043d" name="Default" comment="" />
     <ignored path="BookShopManagementSystem.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -58,7 +42,7 @@
       <file leaf-file-name="app.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/src/css/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
+            <state relative-caret-position="421">
               <caret line="176" column="25" selection-start-line="176" selection-start-column="25" selection-end-line="176" selection-end-column="25" />
               <folding />
             </state>
@@ -658,15 +642,15 @@
       <workItem from="1485136617582" duration="18082000" />
       <workItem from="1485163620632" duration="15008000" />
       <workItem from="1485183646312" duration="6055000" />
-      <workItem from="1485225974750" duration="27360000" />
+      <workItem from="1485225974750" duration="27466000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66505000" />
+    <option name="totallyTimeSpent" value="66611000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1066,7 +1050,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/src/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
+        <state relative-caret-position="421">
           <caret line="176" column="25" selection-start-line="176" selection-start-column="25" selection-end-line="176" selection-end-column="25" />
           <folding />
         </state>
