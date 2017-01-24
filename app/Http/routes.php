@@ -32,6 +32,11 @@ Route::post('/signin',[
 ]);
 
 Route::get('/addbook',[
-    'uses'=>'UserController@getAddBook',
+    'uses'=>'ShopController@getAddBook',
     'as'=>'addbook'
+]);
+
+Route::post('/addbook',[
+    'uses'=>'ShopController@postAddBook',
+    'as'=>'postaddbook'
 ]);

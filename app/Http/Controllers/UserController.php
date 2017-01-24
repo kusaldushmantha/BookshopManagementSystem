@@ -61,7 +61,5 @@ class UserController extends Controller
 
     }
 
-    public function getAddBook(){
-        return view('shop.addbook');
-    }
+
 }

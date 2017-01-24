@@ -102,7 +102,7 @@
             }
         }
         function validateLetters(inputnum,inputString) {
-            var letters = /^[A-Za-z]+$/;
+            var letters = /^[A-Za-z\s]+$/;
             if(inputnum.value==''){
 
             }else if (inputnum.value.match(letters)){
@@ -128,7 +128,6 @@
                 return false;
             }
             return true;
-
         }
     </script>
 @endsection

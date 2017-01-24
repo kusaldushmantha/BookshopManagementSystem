@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('author');
-            $table->integer('price');
+            $table->string('price');
             $table->integer('quantity');
             $table->string('image_path');
             $table->rememberToken();
