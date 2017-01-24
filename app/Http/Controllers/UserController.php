@@ -15,6 +15,7 @@ use Illuminate\Support\MessageBag;
 class UserController extends Controller
 {
     public function getSignup(){
+
         return view('user.signup');
     }
 
@@ -43,7 +44,7 @@ class UserController extends Controller
     }
 
     public function getSignin(){
-        return view('shop.welcome');
+        return view('user.signin');
     }
 
     public function postSignin(Request $request){
@@ -52,7 +53,11 @@ class UserController extends Controller
             'password'=>'required|min:5'
         ]);
 
-        if(Auth::attempt(['username'=>$request->input('username'),'password'=>$request->input('password')])){
+        if(Auth::attempt(['username'=>$request->input('username'),'password'=>$request->input('password'),
+            'accesslevel'=>'admin'])){
+            return redirect()->route('admindash');
+        }else if (Auth::attempt(['username'=>$request->input('username'),'password'=>$request->input('password'),
+            'accesslevel'=>'customer'])){
             return redirect()->route('addbook');
         }else{
             $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
@@ -60,6 +65,5 @@ class UserController extends Controller
         }
 
     }
-
 
 }

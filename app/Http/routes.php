@@ -40,3 +40,8 @@ Route::post('/addbook',[
     'uses'=>'ShopController@postAddBook',
     'as'=>'postaddbook'
 ]);
+
+Route::get('/admindash',[
+    'uses'=>'ShopController@getAdmindash',
+    'as'=>'admindash'
+]);

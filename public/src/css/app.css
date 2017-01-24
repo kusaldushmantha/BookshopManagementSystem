@@ -125,3 +125,54 @@
     font-size: 16px;
     text-shadow:#b3b3b3 1px 1px 3px;
 }
+
+.left{
+    padding: inherit;
+    position: relative;
+    left: -120px;
+}
+
+.navbarFonts{
+    font-size: 15px;
+    text-shadow:#b3b3b3 1px 1px 3px;
+    font-weight: bold;
+}
+
+.nav li a {
+    display: block;
+    line-height: 25px;
+    text-decoration: none;
+    color: #0e0e0e;
+}
+
+.thumbnail{
+    background: transparent;
+    border: solid 1px;
+    -webkit-box-shadow:0px 0px 10px #0e0e0e;
+    -moz-box-shadow: 0px 0px 10px #0e0e0e;
+    box-shadow: 0px 0px 10px #0e0e0e;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.thumbnail img{
+    max-height: 180px;
+}
+
+.thumbnail.description{
+    color: #969191;
+}
+
+.buybook{
+    border: solid;
+    border-color: #387038;
+}
+
+.notAvailable{
+    border: solid;
+    border-color: #942a25;
+}

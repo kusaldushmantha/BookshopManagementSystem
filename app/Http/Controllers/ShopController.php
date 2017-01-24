@@ -39,6 +39,12 @@ class ShopController extends Controller
 
         $book->save();
 
+        return redirect()->back();
+    }
+
+    public function getAdmindash(){
+        $book = Book::all();
+        return view('user.admindash',['books'=>$book]);
     }
 
 }
