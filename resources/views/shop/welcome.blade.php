@@ -5,7 +5,7 @@
         body{
             background-image: url('src/img/openBookreOp.jpg');
             background-repeat: no-repeat;
-            background-size:1400px 650px;
+            background-size:1400px 750px;
             background-opacity:0.5;
         }
     </style>
@@ -19,14 +19,21 @@
 
     <div class="row signIn">
         <div class="col-md-4 col-md-offset-4">
-            <form action="#" method="post" id="loginForm">
+            @if(count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $recievedError)
+                        <p>{{$recievedError}}</p>
+                    @endforeach
+                </div>
+            @endif
+            <form action="{{ route('postsignin') }}" method="post" id="loginForm">
                 <div class="form-group">
                     <label for="username" class="loginLabels">Username : </label>
-                    <input type="text" id="username" name="username" class="form-control">
+                    <input type="text" id="username" name="username" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="loginLabels">Password :</label>
-                    <input type="password" id="password" name="password" class="form-control">
+                    <input type="password" id="password" name="password" class="form-control" required>
                 </div>
                 <div class="buttonalign">
                     <button type="submit" class="btn btn-primary">Sign In</button>

@@ -99,7 +99,8 @@
 
 .addbookcontainer{
 
-    height: 400px;
+    position: relative;
+    height: inherit;
     width: 400px;
     margin: 1px auto;
     background:transparent;

@@ -73,7 +73,10 @@
                 </div>
                 <div class="clearfix" class="labelFonts">
                     <button type="submit" class="btn btn-success signupbtn" id="btnSubmit"
-                    onclick="validateNumbers(contactno),validateLetters(firstname),validateLetters(lastname)">
+                    onclick="validateNumbers(contactno,'ContactNo'),validateLetters(firstname,'Firstname'),
+                    validateLetters(lastname,'Lastname'),
+                    validateSpecialCharacters(username,'Username'),
+                    validateSpecialCharacters(password,'Password')">
                         Create Account</button>
                 </div>
                 {{csrf_field()}}
@@ -86,25 +89,46 @@
 
 @section('scripts')
      <script type="text/javascript">
-        function validateNumbers(inputnum) {
+        function validateNumbers(inputnum,inputString) {
             var num = /^[0-9]+$/;
-            if(inputnum.value.match(num) || inputnum.value=='')
+            if(inputnum.value==''){
+
+            }else if(inputnum.value.match(num)) {
                 return true;
-            else{
-                alert("Please Enter Numeric Characters Only");
+            }else{
+                alert("Please Enter Only Numeric Characters For : "+inputString);
                 inputnum.value='';
                 return false;
             }
         }
-        function validateLetters(inputnum) {
+        function validateLetters(inputnum,inputString) {
             var letters = /^[A-Za-z]+$/;
-            if(inputnum.value.match(letters) || inputnum.value=='')
+            if(inputnum.value==''){
+
+            }else if (inputnum.value.match(letters)){
+                validateSpecialCharacters(inputnum,inputString)
                 return true;
-            else{
-                alert("Please Enter Alphabetic Characters Only");
+            }else{
+                alert("Please Enter Alphabetic Characters Only For : "+inputString);
                 inputnum.value='';
                 return false;
             }
+        }
+        function validateSpecialCharacters(inputnum,inputString) {
+            var username = inputnum.value;
+            if(inputnum.value==''){
+
+            }else if(username.match(/[^0-9a-z]/i)) {
+                alert("Only letters and digits allowed in "+inputString);
+                inputnum.value='';
+                return false;
+            }else if(!username.match(/[a-z]/i)) {
+                alert("At least one letter required in "+inputString);
+                inputnum.value='';
+                return false;
+            }
+            return true;
+
         }
     </script>
 @endsection

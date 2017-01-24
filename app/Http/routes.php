@@ -26,6 +26,11 @@ Route::post('/signup',[
     'as'=>'postsignup'
 ]);
 
+Route::post('/signin',[
+    'uses'=>'UserController@postSignin',
+    'as'=>'postsignin'
+]);
+
 Route::get('/addbook',[
     'uses'=>'UserController@getAddBook',
     'as'=>'addbook'

@@ -29,22 +29,27 @@
                     <input type="text" name="author" id="author" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="price" class="addbooklabel">Unit Price :</label>
+                    <input type="string" name="price" id="price" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="quantity" class="addbooklabel">Quantity :</label>
-                    <input type="number" name="qty" id="qty" class="form-control">
+                    <input type="string" name="qty" id="qty" class="form-control">
                 </div>
                 <div class="form-group">
                             <label for="image" class="addbooklabel">Cover Image :</label>
                             <input type="file" name="image" id="image" class="form-control">
                             <br>
-                        </div>
-                        <div class="form-group ">
-                            <button type="submit" name="submit" class="btn btn-success addBookBtn">Add Book</button>
-                        </div>
-                {{csrf_field()}}
-                    </form>
+                    <label for="imageWarning"> **It is recomended to place all images in the same location</label>
                 </div>
-            </div>
+                <div class="form-group ">
+                    <button type="submit" name="submit" class="btn btn-success addBookBtn">Add Book</button>
+                </div>
+                {{csrf_field()}}
+            </form>
+        </div>
     </div>
+
 
 
 
