@@ -33,15 +33,24 @@ Route::post('/signin',[
 
 Route::get('/addbook',[
     'uses'=>'ShopController@getAddBook',
-    'as'=>'addbook'
+    'as'=>'addbook',
+    'middleware'=>'auth'
 ]);
 
 Route::post('/addbook',[
     'uses'=>'ShopController@postAddBook',
-    'as'=>'postaddbook'
+    'as'=>'postaddbook',
+    'middleware'=>'auth'
 ]);
 
 Route::get('/admindash',[
     'uses'=>'ShopController@getAdmindash',
-    'as'=>'admindash'
+    'as'=>'admindash',
+    'middleware'=>'auth'
+]);
+
+Route::get('/logout',[
+    'uses'=>'UserController@getLogout',
+    'as'=>'logout',
+    'middleware'=>'auth'
 ]);

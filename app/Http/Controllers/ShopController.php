@@ -43,7 +43,7 @@ class ShopController extends Controller
     }
 
     public function getAdmindash(){
-        $book = Book::all();
+        $book = Book::paginate(3);
         return view('user.admindash',['books'=>$book]);
     }
 

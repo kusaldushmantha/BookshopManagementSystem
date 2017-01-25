@@ -41,6 +41,8 @@ class UserController extends Controller
 
         $user->save();
 
+        return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
+
     }
 
     public function getSignin(){
@@ -64,6 +66,11 @@ class UserController extends Controller
             return Redirect::back()->withErrors($errors)->withInput(Input::except('password'));
         }
 
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect()->route('signin');
     }
 
 }

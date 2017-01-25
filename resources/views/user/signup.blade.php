@@ -5,8 +5,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true">
-                    </i> TreeHouse Books</a>
+                @if(Auth::user())
+                    <a class="navbar-brand" href="{{ route('admindash') }}"><i class="fa fa-home" aria-hidden="true">
+                        </i> TreeHouse Books</a>
+                @else
+                    <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true">
+                        </i> TreeHouse Books</a>
+                @endif
             </div>
         </div>
     </nav>
@@ -68,8 +73,10 @@
                     <input  class="labelFonts" type="radio" name="accesslevel" value="customer" checked>
                     <strong>Customer</strong>
                     &nbsp;&nbsp;&nbsp;
-                    <input class="labelFonts" type="radio" name="accesslevel" value="admin">
-                    <strong>Administrator</strong>
+                    @if(Auth::user())
+                        <input class="labelFonts" type="radio" name="accesslevel" value="admin">
+                        <strong>Administrator</strong>
+                    @endif
                 </div>
                 <div class="clearfix" class="labelFonts">
                     <button type="submit" class="btn btn-success signupbtn" id="btnSubmit"

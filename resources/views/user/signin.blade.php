@@ -19,6 +19,13 @@
 
     <div class="row signIn">
         <div class="col-md-4 col-md-offset-4">
+            @if(Session::has('success'))
+                <div class="row">
+                        <div id="charge-message" class="alert alert-success">
+                            <strong>{{ Session::get('success') }}</strong>
+                        </div>
+                </div>
+            @endif
             @if(count($errors)>0)
                 <div class="alert alert-danger">
                     @foreach($errors->all() as $recievedError)
