@@ -176,3 +176,14 @@
     border: solid;
     border-color: #942a25;
 }
+
+.paginateAlign{
+    position: relative;
+    right: -500px;
+}
+
+.adddone{
+    position: relative;
+    right: 0px;
+    text-align: center;
+}

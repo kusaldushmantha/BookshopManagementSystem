@@ -27,8 +27,6 @@ class ShopController extends Controller
         $file = $request->file('image');
         $imagePath = $file->move('covers',$file->getClientOriginalName());
 
-        Session::flash('success', 'Upload successfully');
-
         $book = new Book([
                 'title'=>$request->input('title'),
                 'author'=>$request->input('author'),
@@ -39,11 +37,11 @@ class ShopController extends Controller
 
         $book->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Book Successfully Added');
     }
 
     public function getAdmindash(){
-        $book = Book::paginate(3);
+        $book = Book::paginate(9);
         return view('user.admindash',['books'=>$book]);
     }
 

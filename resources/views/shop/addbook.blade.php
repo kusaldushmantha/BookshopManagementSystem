@@ -30,7 +30,7 @@
     <style>
         body{
             background-image: url('src/img/blankBookreOp.jpg');
-            background-repeat: no-repeat;
+            background-repeat: repeat-y;
             background-size:1400px 650px;
 
         }
@@ -40,6 +40,15 @@
 @section('body')
 
     <div class="row addbookrow">
+        <div class="col-md-4 col-md-offset-4 adddone">
+        @if(Session::has('success'))
+            <div class="row">
+                <div id="charge-message" class="alert alert-success">
+                    <strong>{{ Session::get('success') }}</strong>
+                </div>
+            </div>
+        @endif
+        </div>
         <div class="addbookcontainer">
 
             <form action="{{ route('postaddbook') }}" method="post" id="addBookForm" enctype="multipart/form-data">

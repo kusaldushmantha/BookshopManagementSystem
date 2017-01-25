@@ -52,7 +52,7 @@
     <div>
         <br>
 
-        @foreach($books->chunk(3) as $bookChunks)
+        @foreach(array_chunk($books->getCollection()->all(),3) as $bookChunks)
             <div class="row ">
                 @foreach($bookChunks as $bookChunk)
                     <div class="col-sm-4 viewManager">
@@ -79,5 +79,8 @@
                 @endforeach
             </div>
         @endforeach
+        <div class="paginateAlign">
+            {{ $books->links() }}
+        </div>
     </div>
 @endsection
