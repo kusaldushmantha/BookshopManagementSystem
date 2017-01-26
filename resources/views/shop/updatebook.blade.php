@@ -29,7 +29,7 @@
 @section('styles')
     <style>
         body{
-            background-image: url('src/img/blankBookreOp.jpg');
+            background-image: url('src/img/openBookreOp.jpg');
             background-repeat: repeat-y;
             background-size:1400px 650px;
 
@@ -51,14 +51,14 @@
         </div>
         <div class="addbookcontainer">
 
-            <form action="{{ route('postaddbook') }}" method="post" id="addBookForm" enctype="multipart/form-data">
+            <form action="{{ route('postupdatebook') }}" method="post" id="addBookForm">
                 <div class="form-group">
                     <label for="title" class="addbooklabel">Book Title :</label>
-                    <input type="text" name="title" id="title" class="form-control" required>
+                    <input type="text" name="title" id="title" class="form-control" value="{{ $book->title }}"disabled>
                 </div>
                 <div class="form-group">
                     <label for="author" class="addbooklabel">Author :</label>
-                        <input type="text" name="author" id="author" class="form-control" required >
+                    <input type="text" name="author" id="author" class="form-control" required value="{{ $book->author }}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="price" class="addbooklabel">Unit Price :</label>
@@ -69,14 +69,12 @@
                     <input type="string" name="qty" id="qty" class="form-control" required>
                 </div>
                 <div class="form-group">
-                            <label for="image" class="addbooklabel">Cover Image :</label>
-                            <input type="file" name="image" id="image" class="form-control" required>
-                            <br>
+                    <input type="hidden" name="id" id="id" class="form-control" value="{{ $book->id }}" hidden>
                 </div>
                 <div class="form-group ">
                         <button type="submit" name="submit" class="btn btn-success addBookBtn"
                                 onclick = "validateLetters(author,'Author'),validateFloat(price,'Price'),
-                        validateNumbers(qty,'Quantity')">Add Book</button>
+                        validateNumbers(qty,'Quantity')">Update Book</button>
                 </div>
                 {{csrf_field()}}
             </form>

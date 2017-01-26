@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
@@ -27,22 +27,40 @@ class ShopController extends Controller
         $file = $request->file('image');
         $imagePath = $file->move('covers',$file->getClientOriginalName());
 
-        $book = new Book([
+            $book = new Book([
                 'title'=>$request->input('title'),
                 'author'=>$request->input('author'),
                 'price'=>$request->input('price'),
                 'quantity'=>$request->input('qty'),
-                'image_path'=> $imagePath
-            ]);
+                'image_path'=> $imagePath]);
 
-        $book->save();
+            $book->save();
 
-        return redirect()->back()->with('success','Book Successfully Added');
+            return redirect()->back()->with('success','Book Successfully Added');
+
+
     }
 
     public function getAdmindash(){
         $book = Book::paginate(9);
         return view('user.admindash',['books'=>$book]);
+    }
+
+    public function getViewStore(){
+        $book = Book::paginate(20);
+        return view('shop.viewstore',['books'=>$book]);
+    }
+
+    public function getUpdateBook($id){
+        $book = Book::find($id);
+        return view('shop.updatebook',['book'=>$book]);
+    }
+
+    public function postUpdateBook(Request $request){
+        $book = DB::table('books')->where(['id'=>$request->input('id')])->update(['price' => $request->input('price'),
+        'quantity' => $request->input('qty')]);
+
+        return redirect()->route('viewstore')->with('success','Book Successfully Updated');
     }
 
 }

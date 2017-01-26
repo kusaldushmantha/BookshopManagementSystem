@@ -32,7 +32,7 @@
 @section('styles')
     <style>
         body{
-            background-image: url('src/img/booklotreOp.jpg');
+            background-image: url('src/img/booksreOp.jpg');
             background-repeat: repeat-y;
             background-size:1400px 725px;
 
@@ -46,7 +46,7 @@
                 <li role="presentation" class="active"><a href="{{ route('admindash') }}">Book Store</a></li>
                 <li role="presentation"><a href="{{ route('addbook') }}">Add Book</a></li>
                 <li role="presentation"><a href="{{ route('signup') }}">Add Shopkeeper/Customer</a></li>
-                <li role="presentation"><a href="{{ route('signup') }}">View Store Status</a></li>
+                <li role="presentation"><a href="{{ route('viewstore') }}">View Store Status</a></li>
             </ul>
     </div>
     <div>

@@ -16,12 +16,13 @@
     <script src="https://use.fontawesome.com/d42c93a016.js"></script>
     <link rel="stylesheet" href="{{URL::to('src/css/app.css')}}">
 
-    @yield('styles')
 
 </head>
 
 <body>
     @yield('header')
+
+    @yield('styles')
 
     <div class="container">
         @yield('body')

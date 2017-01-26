@@ -187,3 +187,54 @@
     right: 0px;
     text-align: center;
 }
+
+.panelBorder{
+    background: transparent;
+    border: solid 1px;
+    -webkit-box-shadow:0px 0px 10px #0e0e0e;
+    -moz-box-shadow: 0px 0px 10px #0e0e0e;
+    box-shadow: 0px 0px 10px #0e0e0e;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.storeViewPaginateAlign{
+    position: relative;
+    right: -260px;
+}
+
+
+.badgeqtyok{
+    background:green;
+    text-align:center;
+    box-shadow:0 0 1px #333;
+}
+
+.badgeqtyalert{
+    background:#ff3138;
+    text-align:center;
+    box-shadow:0 0 1px #333;
+}
+
+.alignauthor{
+    position: relative;
+    text-align: center;
+    background: #b3b3b3;
+    right: 30px;
+    font-size: 13px;
+}
+
+.alignprice{
+    position: absolute;
+    text-align: center;
+    background: #b3b3b3;
+    left: 400px;
+}
+
+.modify{
+    left: auto;
+}

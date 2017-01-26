@@ -37,6 +37,19 @@ Route::get('/addbook',[
     'middleware'=>'auth'
 ]);
 
+
+Route::get('/updatebook/{id}',[
+    'uses'=>'ShopController@getUpdateBook',
+    'as'=>'updatebook',
+    'middleware'=>'auth'
+]);
+
+Route::post('/updatebook',[
+    'uses'=>'ShopController@postUpdateBook',
+    'as'=>'postupdatebook',
+    'middleware'=>'auth'
+]);
+
 Route::post('/addbook',[
     'uses'=>'ShopController@postAddBook',
     'as'=>'postaddbook',
@@ -52,5 +65,11 @@ Route::get('/admindash',[
 Route::get('/logout',[
     'uses'=>'UserController@getLogout',
     'as'=>'logout',
+    'middleware'=>'auth'
+]);
+
+Route::get('/viewstore',[
+    'uses'=>'ShopController@getViewStore',
+    'as'=>'viewstore',
     'middleware'=>'auth'
 ]);
