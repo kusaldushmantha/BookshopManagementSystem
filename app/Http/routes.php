@@ -73,3 +73,31 @@ Route::get('/viewstore',[
     'as'=>'viewstore',
     'middleware'=>'auth'
 ]);
+
+Route::get('/customerdash',[
+    'uses'=>'UserController@getCustomerDash',
+    'as'=>'customerdash',
+    'middleware'=>'auth'
+]);
+
+Route::get('/shoppingcart',[
+    'uses'=>'ShopController@getShoppingCart',
+    'as'=>'shoppingcart',
+    'middleware'=>'auth'
+]);
+
+Route::get('/addtocart/{id}',[
+    'uses'=>'ShopController@getAddtoCart',
+    'as'=>'addtocart',
+    'middleware'=>'auth'
+]);
+
+Route::get('/reduce/{id}',[
+    'uses'=>'ShopController@getReduceByOne',
+    'as'=>'reduceByOne'
+]);
+
+Route::get('/remove/{id}',[
+    'uses'=>'ShopController@getReduceAll',
+    'as'=>'removeall'
+]);

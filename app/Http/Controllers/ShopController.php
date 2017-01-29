@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
@@ -51,6 +52,15 @@ class ShopController extends Controller
         return view('shop.viewstore',['books'=>$book]);
     }
 
+    public function getShoppingCart(){
+        if(!Session::has('cart')){
+            return view('user.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new ShoppingCart($oldCart);
+        return view('user.shopping-cart',['books'=>$cart->books,'totalPrice'=>$cart->totalPrice]);
+    }
+
     public function getUpdateBook($id){
         $book = Book::find($id);
         return view('shop.updatebook',['book'=>$book]);
@@ -61,6 +71,45 @@ class ShopController extends Controller
         'quantity' => $request->input('qty')]);
 
         return redirect()->route('viewstore')->with('success','Book Successfully Updated');
+    }
+
+    public function getAddtoCart(Request $request,$id){
+        $book = Book::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart'):null;
+        $shoppingCart = new ShoppingCart($oldCart);
+        $shoppingCart->addBook($book,$book->id);
+
+        Session::put('cart',$shoppingCart);
+
+        return redirect()->route('customerdash')->with('success', $book->title.' Added to Cart');
+    }
+
+    public function getReduceAll($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new ShoppingCart($oldCart);
+        $cart->reduceAll($id);
+
+        if(count($cart->books)>0){
+            Session::put('cart',$cart);
+        }else{
+            Session::forget('cart');
+            return redirect()->route('customerdash');
+        }
+        return redirect()->route('shoppingcart');
+    }
+
+    public function getReduceByOne($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new ShoppingCart($oldCart);
+        $cart->reduceByOne($id);
+
+        if(count($cart->books)>0){
+            Session::put('cart',$cart);
+        }else{
+            Session::forget('cart');
+            return redirect()->route('customerdash');
+        }
+        return redirect()->route('shoppingcart');
     }
 
 }

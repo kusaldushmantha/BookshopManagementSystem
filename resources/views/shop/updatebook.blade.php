@@ -30,8 +30,7 @@
     <style>
         body{
             background-image: url('src/img/openBookreOp.jpg');
-            background-repeat: repeat-y;
-            background-size:1400px 650px;
+            background-repeat: no-repeat;
 
         }
     </style>

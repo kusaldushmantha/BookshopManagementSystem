@@ -22,4 +22,9 @@ class User extends Model implements AuthenticatableContract,
 
     use Authenticatable, Authorizable, CanResetPassword;
 
+
+    public function orders(){
+        return $this->hasMany('App\Order');
+    }
+
 }

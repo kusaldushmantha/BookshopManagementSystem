@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
@@ -60,12 +61,17 @@ class UserController extends Controller
             return redirect()->route('admindash');
         }else if (Auth::attempt(['username'=>$request->input('username'),'password'=>$request->input('password'),
             'accesslevel'=>'customer'])){
-            return redirect()->route('addbook');
+            return redirect()->route('customerdash');
         }else{
             $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
             return Redirect::back()->withErrors($errors)->withInput(Input::except('password'));
         }
 
+    }
+
+    public function getCustomerDash(){
+        $book = Book::paginate(15);
+        return view('user.customerdash',['books'=>$book]);
     }
 
     public function getLogout(){

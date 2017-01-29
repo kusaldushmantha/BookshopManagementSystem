@@ -238,3 +238,26 @@
 .modify{
     left: auto;
 }
+
+
+.badgeqty{
+    position: absolute;
+    right: 150px;
+    top: inherit;
+    border: solid;
+    border-radius: 20%;
+    border-color: #62c462;
+    background: #5bb75b;
+    color: #f5f8fa;
+}
+
+.total{
+    font-size:18px;
+    right:-200px;
+    position: relative;
+}
+
+.checkoutModify{
+    text-align: center;
+}
+
