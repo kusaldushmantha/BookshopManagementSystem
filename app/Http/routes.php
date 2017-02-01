@@ -94,10 +94,24 @@ Route::get('/addtocart/{id}',[
 
 Route::get('/reduce/{id}',[
     'uses'=>'ShopController@getReduceByOne',
-    'as'=>'reduceByOne'
+    'as'=>'reduceByOne',
+    'middleware'=>'auth'
 ]);
 
 Route::get('/remove/{id}',[
     'uses'=>'ShopController@getReduceAll',
-    'as'=>'removeall'
+    'as'=>'removeall',
+    'middleware'=>'auth'
+]);
+
+Route::get('/updateaccount/{id}',[
+    'uses'=>'UserController@getUpdateAccount',
+    'as'=>'updateaccount',
+    'middleware'=>'auth'
+]);
+
+Route::post('/updateaccount',[
+    'uses'=>'UserController@postUpdateAccount',
+    'as'=>'postupdateaccount',
+    'middleware'=>'auth'
 ]);

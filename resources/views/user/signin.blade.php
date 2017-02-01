@@ -54,7 +54,7 @@
             <div class="loginAlternative">
                 <a href="{{ route('signup') }}" class="createAccountLogin">Create an Account </a>
                 &nbsp;&nbsp;
-                <a href="#" class="createAccountLogin">Browse Books only</a>
+                <a href="{{ route('customerdash') }}" class="createAccountLogin">Browse Books only</a>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Book;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,7 @@ class UserController extends Controller
             'accesslevel'=>'customer'])){
             return redirect()->route('customerdash');
         }else{
-            $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
+            $errors = new MessageBag(['password' => ['Username and/or password invalid.']]);
             return Redirect::back()->withErrors($errors)->withInput(Input::except('password'));
         }
 
@@ -77,6 +78,28 @@ class UserController extends Controller
     public function getLogout(){
         Auth::logout();
         return redirect()->route('signin');
+    }
+
+    public function getUpdateAccount($id){
+        $user = User::find($id);
+        return view('user.updateaccount',['user'=>$user]);
+    }
+
+    public function postUpdateAccount(Request $request){
+        $oldp = DB::table('users')->where(['id'=>$request->input('id')])->pluck('password')[0];
+        if(!Hash::check($request->input('oldpassword'),$oldp)){
+            return redirect()->route('updateaccount',['id'=>$request->input('id')])
+                ->with('danger','Entered Old Password Does not match with Current Password');
+        }
+        if($request->input('oldpassword'))
+        $user = DB::table('users')->where(['id'=>$request->input('id')])->update(['username' => $request->input('username'),
+            'password' => bcrypt($request->input('password'))]);
+        if(Auth::user()->accesslevel=="admin"){
+            return redirect()->route('admindash')->with('success','Account Successfully Updated');
+        }else{
+            return redirect()->route('customerdash')->with('success','Account Successfully Updated');
+        }
+
     }
 
 }

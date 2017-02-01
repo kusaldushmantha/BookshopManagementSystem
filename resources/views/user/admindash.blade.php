@@ -4,9 +4,11 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('admindash') }}"><i class="fa fa-home" aria-hidden="true">
-
-                    </i> TreeHouse Books</a>
+                @if(Auth::user()->accesslevel == "customer")
+                    <a class="navbar-brand" href="{{ route('customerdash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @else
+                    <a class="navbar-brand" href="{{ route('admindash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @endif
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -18,7 +20,7 @@
                                                                          aria-hidden="true"></i>
                             My Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Change Account</a></li>
+                            <li><a href="{{ route('updateaccount',['id'=>Auth::user()->id]) }}">Change Account</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
@@ -51,6 +53,14 @@
     </div>
     <div>
         <br>
+
+        @if(Session::has('success'))
+            <div class="row adddone">
+                <div id="charge-message" class="alert alert-success">
+                    <strong>{{ Session::get('success') }}</strong>
+                </div>
+            </div>
+        @endif
 
         @foreach(array_chunk($books->getCollection()->all(),3) as $bookChunks)
             <div class="row ">

@@ -4,8 +4,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('customerdash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @if(Auth::user()->accesslevel == "customer")
+                    <a class="navbar-brand" href="{{ route('customerdash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @else
+                    <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @endif
             </div>
+            @if(Auth::user())
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ route('shoppingcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -17,13 +22,14 @@
                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
                             My Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Change Account</a></li>
+                            <li><a href="{{ route('updateaccount',['id'=>Auth::user()->id]) }}">Change Account</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
+            @endif
         </div>
     </nav>
 @endsection
@@ -61,8 +67,12 @@
                             <div class="clearfix">
                                 <div class="pull-left price">${{ $bookChunk->price }}</div>
                                 @if(!$bookChunk->quantity==0)
-                                    <a href="{{ route('addtocart',['id'=>$bookChunk->id]) }}" class="btn btn-success pull-right buybook"
-                                       role="button">Get Book</a>
+                                    @if(Auth::user())
+                                        <a href="{{ route('addtocart',['id'=>$bookChunk->id]) }}"
+                                           class="btn btn-success pull-right buybook" role="button">Get Book</a>
+                                    @else
+                                        <button class="btn buybook btn-success pull-right" disabled>Available</button>
+                                    @endif
                                 @else
                                     <a class="btn btn-danger pull-right notAvailable"
                                        role="button" disabled="">Not Available</a>
