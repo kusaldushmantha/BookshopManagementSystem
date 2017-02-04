@@ -26,7 +26,7 @@
             <h1 class="check"><strong>Checkout</strong></h1>
             <h4 class="check">Your Total is : ${{$total}}</h4>
             <hr>
-            <div id="charge-error" class="alert alert-danger {{ Session::has('error')? 'hidden':''}}">
+            <div id="charge-error" class="alert alert-danger {{ !Session::has('error')? 'hidden':''}}">
                 {{ Session::get('error') }}
             </div>
             <form action="{{ route('checkout') }}" method="post" id="checkoutform">
@@ -34,7 +34,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="name">Cutomer Name: </label>
-                            <input type="text" id="name"class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="name">Cutomer Address: </label>
-                            <input type="text" id="address" class="form-control" required>
+                            <input type="text" id="address" name="address" class="form-control" required>
                         </div>
                     </div>
                 </div>

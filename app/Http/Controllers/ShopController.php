@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Order;
 use App\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,6 +147,15 @@ class ShopController extends Controller
                 "description" => $request->input('name').' '.'checkout on '.$date->getTimestamp(),
                 "source" => $request->input('stripeToken'),
             ));
+
+            $order = new Order();
+            $order->cart = serialize($cart);
+            $order->address = $request->input('address');
+            $order->customername = $request->input('name');
+            $order->payment_id = $charge->id;
+
+            Auth::user()->orders()->save($order);
+
         }catch(\Exception $e){
             return redirect()->route('checkout')->with('error',$e->getMessage());
         }
