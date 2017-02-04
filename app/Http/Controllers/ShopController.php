@@ -87,8 +87,12 @@ class ShopController extends Controller
         $shoppingCart->addBook($book,$book->id);
 
         Session::put('cart',$shoppingCart);
+        if(Auth::user()->accesslevel=="customer"){
+            return redirect()->route('customerdash')->with('success', $book->title.' Added to Cart');
+        }else{
+            return redirect()->route('admindash')->with('success', $book->title.' Added to Cart');
+        }
 
-        return redirect()->route('customerdash')->with('success', $book->title.' Added to Cart');
     }
 
     public function getReduceAll($id){
@@ -100,7 +104,12 @@ class ShopController extends Controller
             Session::put('cart',$cart);
         }else{
             Session::forget('cart');
-            return redirect()->route('customerdash');
+            if(Auth::user()->accesslevel=="customer"){
+                return redirect()->route('customerdash');
+            }else{
+                return redirect()->route('admindash');
+            }
+
         }
         return redirect()->route('shoppingcart');
     }
@@ -114,7 +123,11 @@ class ShopController extends Controller
             Session::put('cart',$cart);
         }else{
             Session::forget('cart');
-            return redirect()->route('customerdash');
+            if(Auth::user()->accesslevel=="customer"){
+                return redirect()->route('customerdash');
+            }else{
+                return redirect()->route('admindash');
+            }
         }
         return redirect()->route('shoppingcart');
     }
@@ -139,8 +152,19 @@ class ShopController extends Controller
         Stripe::setApiKey('sk_test_U65gLxf4AtyH03N0RUWzOitd');
 
         $date = new DateTime();
+        $bookArray = null;
 
         try{
+
+            foreach ($cart->books as $book){
+                $bookArray[$book['book']['id']]=$book['qty'];
+            }
+
+            foreach($bookArray as $x => $x_value) {
+                $qtyCurrent = DB::table('books')->where(['id'=>$x])->value('quantity');
+                DB::table('books')->where(['id'=>$x])->update(['quantity' => $qtyCurrent-$x_value]);
+            }
+
             $charge = \Stripe\Charge::create(array(
                 "amount" => $cart->totalPrice *100,
                 "currency" => "usd",
@@ -153,6 +177,7 @@ class ShopController extends Controller
             $order->address = $request->input('address');
             $order->customername = $request->input('name');
             $order->payment_id = $charge->id;
+
 
             Auth::user()->orders()->save($order);
 
@@ -167,6 +192,11 @@ class ShopController extends Controller
         }else{
             return redirect()->route('customerdash')->with('success','Books Purchased Successfully');
         }
+    }
+
+    public function getDeleteBook($id){
+        DB::table('books')->where(['id'=>$id])->delete();
+        return redirect()->route('admindash')->with('success','Books Removed Successfully');
     }
 
 }

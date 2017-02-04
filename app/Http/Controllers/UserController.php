@@ -43,7 +43,7 @@ class UserController extends Controller
 
         $user->save();
         if(Auth::user()->accesslevel=='admin'){
-            return redirect()->route('admindash')->with('success','Account created Successfuly, Sign-in to Continue');
+            return redirect()->route('admindash')->with('success','Account created Successfuly');
         }
         return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
 
@@ -74,7 +74,12 @@ class UserController extends Controller
 
     public function getCustomerDash(){
         $book = Book::paginate(15);
-        return view('user.customerdash',['books'=>$book]);
+        if(Auth::user()->accesslevel=="customer"){
+            return view('user.customerdash',['books'=>$book]);
+        }else{
+            return view('user.admindash',['books'=>$book]);
+        }
+
     }
 
     public function getLogout(){
@@ -102,6 +107,16 @@ class UserController extends Controller
             return redirect()->route('customerdash')->with('success','Account Successfully Updated');
         }
 
+    }
+
+    public function getMyPurchase(){
+        $purchase = Auth::user()->orders;
+        $purchase->transform(function ($order,$key){
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+
+        return view('user.purchase',['purchase'=>$purchase]);
     }
 
 }

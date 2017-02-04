@@ -12,8 +12,9 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            Shopping Cart</a></li>
+                    <li><a href="{{ route('shoppingcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            Shopping Cart <span class="badge">{{Session::has('cart') ?
+                            Session::get('cart')->totalQty :''}}</span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"
@@ -51,9 +52,9 @@
                 <li role="presentation"><a href="{{ route('viewstore') }}">View Store Status</a></li>
             </ul>
     </div>
-    <div>
-        <br>
+    <br>
 
+    <div>
         @if(Session::has('success'))
             <div class="row adddone">
                 <div id="charge-message" class="alert alert-success">
@@ -76,7 +77,8 @@
                                 <div class="clearfix">
                                     <div class="pull-left price">${{ $bookChunk->price }}</div>
                                     @if(!$bookChunk->quantity==0)
-                                        <a href="#" class="btn btn-success pull-right buybook"
+                                        <a href="{{ route('addtocart',['id'=>$bookChunk->id]) }}"
+                                           class="btn btn-success pull-right buybook"
                                            role="button">Get Book</a>
                                     @else
                                         <a class="btn btn-danger pull-right notAvailable"

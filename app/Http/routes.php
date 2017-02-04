@@ -50,6 +50,12 @@ Route::post('/updatebook',[
     'middleware'=>'auth'
 ]);
 
+Route::get('/deletebook/{id}',[
+    'uses'=>'ShopController@getDeleteBook',
+    'as'=>'deletebook',
+    'middleware'=>'auth'
+]);
+
 Route::post('/addbook',[
     'uses'=>'ShopController@postAddBook',
     'as'=>'postaddbook',
@@ -124,4 +130,16 @@ Route::get('/checkout',[
 Route::post('/checkout',[
     'uses'=>'ShopController@postCheckout',
     'as'=>'checkout'
+]);
+
+Route::get('/mypurchase',[
+    'uses'=>'UserController@getMyPurchase',
+    'as'=>'getmypurchase',
+    'middleware'=>'auth'
+]);
+
+Route::post('/mypurchase',[
+    'uses'=>'UserController@postmypurchase',
+    'as'=>'postmypurchase',
+    'middleware'=>'auth'
 ]);
