@@ -261,3 +261,14 @@
     text-align: center;
 }
 
+.check{
+    text-align: center;
+}
+
+.buy{
+    position: relative;
+    right: -130px;
+    border: solid;
+    border-color: #387038;
+    margin-bottom: 10px;
+}

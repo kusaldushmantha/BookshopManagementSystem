@@ -20,7 +20,8 @@ class CreateBooksTable extends Migration
             $table->integer('quantity');
             $table->string('image_path');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
 

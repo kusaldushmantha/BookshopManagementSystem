@@ -28,7 +28,7 @@ class UserController extends Controller
             'username'=>'required|min:5|unique:users',
             'password'=>'required|min:5|confirmed',
             'password_confirmation'=>'required|min:5',
-            'contactno'=>'required|min:10|max:10|unique:users',
+            'contactno'=>'required|min:10|max:10',
             'accesslevel'=>'in:admin,customer'
         ]);
 
@@ -42,7 +42,9 @@ class UserController extends Controller
         ]);
 
         $user->save();
-
+        if(Auth::user()->accesslevel=='admin'){
+            return redirect()->route('admindash')->with('success','Account created Successfuly, Sign-in to Continue');
+        }
         return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
 
     }

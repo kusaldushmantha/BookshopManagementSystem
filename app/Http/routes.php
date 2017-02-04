@@ -115,3 +115,13 @@ Route::post('/updateaccount',[
     'as'=>'postupdateaccount',
     'middleware'=>'auth'
 ]);
+
+Route::get('/checkout',[
+   'uses'=>'ShopController@getCheckout',
+    'as'=>'checkout'
+]);
+
+Route::post('/checkout',[
+    'uses'=>'ShopController@postCheckout',
+    'as'=>'checkout'
+]);

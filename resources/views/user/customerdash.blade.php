@@ -23,6 +23,7 @@
                             My Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('updateaccount',['id'=>Auth::user()->id]) }}">Change Account</a></li>
+                            <li><a href="#">My Purchases</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
