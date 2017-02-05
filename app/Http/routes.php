@@ -80,6 +80,18 @@ Route::get('/viewstore',[
     'middleware'=>'auth'
 ]);
 
+Route::get('/emptystocks',[
+    'uses'=>'ShopController@getEmptyStocks',
+    'as'=>'emptystock',
+    'middleware'=>'auth'
+]);
+
+Route::get('/runningoutstocks',[
+    'uses'=>'ShopController@getRunningOutStocks',
+    'as'=>'runningoutstocks',
+    'middleware'=>'auth'
+]);
+
 Route::get('/customerdash',[
     'uses'=>'UserController@getCustomerDash',
     'as'=>'customerdash',

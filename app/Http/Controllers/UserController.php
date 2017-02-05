@@ -74,11 +74,7 @@ class UserController extends Controller
 
     public function getCustomerDash(){
         $book = Book::paginate(15);
-        if(Auth::user()->accesslevel=="customer"){
-            return view('user.customerdash',['books'=>$book]);
-        }else{
-            return view('user.admindash',['books'=>$book]);
-        }
+        return view('user.customerdash',['books'=>$book]);
 
     }
 

@@ -89,4 +89,11 @@
 @section('scripts')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript" src="{{ URL::to('src/js/checkout.js') }}"></script>
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-error").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
 @endsection

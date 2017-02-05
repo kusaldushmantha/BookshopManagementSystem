@@ -6,8 +6,11 @@
             <div class="navbar-header">
                 @if(Auth::user()->accesslevel == "customer")
                     <a class="navbar-brand" href="{{ route('customerdash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+                @elseif(Auth::user()->accesslevel == "admin")
+                    <a class="navbar-brand" href="{{ route('admindash') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
                 @else
                     <a class="navbar-brand" href="{{ route('signin') }}"><i class="fa fa-home" aria-hidden="true"></i> TreeHouse Books</a>
+
                 @endif
             </div>
         </div>

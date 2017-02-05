@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use DateTime;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Expr\Cast\Object_;
 use Stripe\Stripe;
 
 class ShopController extends Controller
@@ -54,6 +55,16 @@ class ShopController extends Controller
     public function getViewStore(){
         $book = Book::paginate(20);
         return view('shop.viewstore',['books'=>$book]);
+    }
+
+    public function getEmptyStocks(){
+        $book = Book::where('quantity',0)->paginate(20);
+        return view('shop.emptystock',['books'=>$book]);
+    }
+
+    public function getRunningOutStocks(){
+        $book = Book::whereBetween('quantity',[1,10])->paginate(20);
+        return view('shop.runningout',['books'=>$book]);
     }
 
     public function getShoppingCart(){

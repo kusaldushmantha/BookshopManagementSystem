@@ -22,6 +22,7 @@
                             My Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('updateaccount',['id'=>Auth::user()->id]) }}">Change Account</a></li>
+                            <li><a href="{{ route('getmypurchase',['id'=>Auth::user()->id]) }}">My Purchases</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
@@ -95,4 +96,14 @@
             {{ $books->links() }}
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
 @endsection

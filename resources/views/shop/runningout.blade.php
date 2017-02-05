@@ -26,22 +26,13 @@
 @section('body')
     <div class="row">
         <ul class="nav nav-pills navbarFonts">
-            <li role="presentation" class="active"><a href="{{ route('viewstore') }}">All Store</a></li>
-            <li role="presentation"><a href="{{ route('runningoutstocks') }}">Stocks Running Out</a></li>
+            <li role="presentation"><a href="{{ route('viewstore') }}">All Store</a></li>
+            <li role="presentation"class="active"><a href="{{ route('runningoutstocks') }}">Stocks Running Out</a></li>
             <li role="presentation"><a href="{{ route('emptystock') }}">Empty Stocks</a></li>
         </ul>
     </div>
     <br>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 adddone">
-            @if(Session::has('success'))
-                <div class="row">
-                    <div id="charge-message" class="alert alert-success">
-                        <strong>{{ Session::get('success') }}</strong>
-                    </div>
-                </div>
-            @endif
-        </div>
         <div class="col-md-8 col-md-offset-2">
 
             @foreach(array_chunk($books->getCollection()->all(),20) as $bookChunks)
@@ -74,14 +65,15 @@
             </div>
 
         </div>
+
     </div>
-    @section("scripts")
-        <script type="text/javascript">
-            window.setTimeout(function() {
-                $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
-                    $(this).remove();
-                });
-            }, 3000);
-        </script>
-    @endsection
+@section("scripts")
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+@endsection
 @endsection

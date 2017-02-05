@@ -29,6 +29,7 @@
             <div class="row">
                 <div id="charge-message" class="alert alert-success">
                     <strong>{{ Session::get('success') }}</strong>
+                    {{ Session::forget('success') }}
                 </div>
             </div>
         @endif
@@ -124,4 +125,13 @@
             return true;
         }
     </script>
+
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+
 @endsection

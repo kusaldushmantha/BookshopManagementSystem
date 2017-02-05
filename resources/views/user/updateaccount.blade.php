@@ -151,3 +151,13 @@
         }
     </script>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+@endsection
