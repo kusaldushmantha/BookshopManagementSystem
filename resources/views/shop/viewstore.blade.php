@@ -42,6 +42,13 @@
                 </div>
             @endif
         </div>
+
+        @if(Session::has('updatebooksuccess'))
+            <script type="text/javascript">
+                swal("Update Successfull !", "Book Successfully Updated", "success")
+            </script>
+        @endif
+
         <div class="col-md-8 col-md-offset-2">
 
             @foreach(array_chunk($books->getCollection()->all(),20) as $bookChunks)
@@ -59,8 +66,8 @@
                                     <span class="badge alignauthor"> {{ $item['author'] }} </span>
                                     <span class="badge alignprice"> ${{ $item['price'] }} </span>
                                     <span class="btn-group btnmodify">
-                                        <a href="{{ route('updatebook',['id'=>$item->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        <a href="{{ route('deletebook',['id'=>$item->id]) }}"><i class="fa fa-trash modify" aria-hidden="true"></i></a>
+                                        <a href="{{ route('updatebook',['id'=>$item->id]) }}"><button class="fa fa-pencil btn-success" aria-hidden="true"></button></a>
+                                        <a class="delete_book" href="{{ route('deletebook',['id'=>$item->id]) }}"><button class="fa fa-trash modify btn-danger " aria-hidden="true"></button></a>
                                     </span>
                                 </li>
                             @endforeach
@@ -75,7 +82,9 @@
 
         </div>
     </div>
-    @section("scripts")
+@endsection
+
+@section("scripts")
         <script type="text/javascript">
             window.setTimeout(function() {
                 $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
@@ -83,5 +92,4 @@
                 });
             }, 3000);
         </script>
-    @endsection
 @endsection

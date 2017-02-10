@@ -35,7 +35,7 @@
         <div class="signupcontainer">
 
             @if(count($errors)>0)
-                <div class="alert alert-danger">
+                <div id="charge-message" class="alert alert-danger">
                     @foreach($errors->all() as $recievedError)
                         <p>{{$recievedError}}</p>
                     @endforeach
@@ -64,8 +64,8 @@
                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactno" class="labelFonts">Contact No :</label>
-                    <input type="text" name="contactno" id="contactno" class="form-control" required>
+                    <label for="email" class="labelFonts">Email :</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="accesslevel" class="labelFonts">Access Level :</label>
@@ -95,6 +95,15 @@
 @endsection
 
 @section('scripts')
+
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+
      <script type="text/javascript">
         function validateNumbers(inputnum,inputString) {
             var num = /^[0-9]+$/;

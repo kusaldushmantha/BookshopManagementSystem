@@ -55,14 +55,37 @@
     </div>
     <br>
 
-    <div>
-        @if(Session::has('success'))
-            <div class="row adddone">
-                <div id="charge-message" class="alert alert-success">
-                    <strong>{{ Session::get('success') }}</strong>
-                </div>
+    @if(Session::has('success'))
+        <div class="row adddone">
+            <div id="charge-message" class="alert alert-success">
+                <strong>{{ Session::get('success') }}</strong>
             </div>
+        </div>
+    @endif
+
+        @if(Session::has('adminsuccess'))
+            <script type="text/javascript">
+                swal("Success!", "Account Successfully Created !", "success")
+            </script>
         @endif
+
+            @if(Session::has('adminpurchasesuccess'))
+                <script type="text/javascript">
+                    swal("Purchase Successfull !", "Books successfully purchased. Thank you !", "success")
+                </script>
+            @endif
+
+    @if(Session::has('adminupdatesuccess'))
+        <script type="text/javascript">
+            swal("Update Successfull !", "Your Account Updated Successfully", "success")
+        </script>
+    @endif
+
+    @if(Session::has('updatedanger'))
+        <script type="text/javascript">
+            swal("Error in Update", "Entered Old Password Does not match with Current Password", "error")
+        </script>
+    @endif
 
         @foreach(array_chunk($books->getCollection()->all(),3) as $bookChunks)
             <div class="row ">
@@ -95,7 +118,6 @@
         <div class="paginateAlign">
             {{ $books->links() }}
         </div>
-    </div>
 @endsection
 
 @section('scripts')

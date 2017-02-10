@@ -85,15 +85,15 @@
                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="contactno" class="labelFonts">Contact No :</label>
-                        <input type="text" name="contactno" id="contactno" class="form-control" required>
+                        <label for="email" class="labelFonts">Email :</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="id" id="id" class="form-control" value="{{ $user->id }}" hidden>
                     </div>
                     <div class="clearfix" class="labelFonts">
                         <button type="submit" class="btn btn-success signupbtn" id="btnSubmit"
-                                onclick="validateNumbers(contactno,'ContactNo'),validateLetters(firstname,'Firstname'),
+                                onclick="validateLetters(firstname,'Firstname'),
                     validateLetters(lastname,'Lastname'),
                     validateSpecialCharacters(username,'Username'),
                     validateSpecialCharacters(password,'Password')">

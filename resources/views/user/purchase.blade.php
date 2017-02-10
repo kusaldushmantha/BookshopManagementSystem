@@ -29,10 +29,20 @@
 
 @section('body')
     <div class="row">
+
         <div class="col-md-8 col-md-offset-2">
             <h2 align="center">My Purchases</h2>
             <hr>
             <br>
+            @if($purchase->count()==0)
+                <div class="col-md-4 col-md-offset-4 adddone">
+                    <div class="row">
+                        <div id="message" class="alert alert-success">
+                            <strong>Empty Purchase History</strong>
+                        </div>
+                    </div>
+                </div>
+            @else
             @foreach($purchase as $p)
                 <div class="panel panel-success panelModify">
                     <div class="panel-heading">
@@ -52,6 +62,7 @@
                     <div class="panel-footer"><strong>Total Price : ${{ $p->cart->totalPrice }}</strong></div>
                 </div>
             @endforeach
+            @endif
         </div>
     </div>
 @endsection

@@ -28,7 +28,7 @@ class UserController extends Controller
             'username'=>'required|min:5|unique:users',
             'password'=>'required|min:5|confirmed',
             'password_confirmation'=>'required|min:5',
-            'contactno'=>'required|min:10|max:10',
+            'email'=>'email|required',
             'accesslevel'=>'in:admin,customer'
         ]);
 
@@ -37,15 +37,18 @@ class UserController extends Controller
             'lastname' => $request->input('lastname'),
             'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
-            'contactno' => $request->input('contactno'),
+            'email' => $request->input('email'),
             'accesslevel' => $request->input('accesslevel')
         ]);
 
         $user->save();
-        if(Auth::user()->accesslevel=='admin'){
-            return redirect()->route('admindash')->with('success','Account created Successfuly');
+        try{
+            if(Auth::user()->accesslevel=='admin'){
+                return redirect()->route('admindash')->with('adminsuccess','Account created Successfuly');
+            }
+        }catch (\Exception $e){
+            return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
         }
-        return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
 
     }
 
@@ -92,15 +95,15 @@ class UserController extends Controller
         $oldp = DB::table('users')->where(['id'=>$request->input('id')])->pluck('password')[0];
         if(!Hash::check($request->input('oldpassword'),$oldp)){
             return redirect()->route('updateaccount',['id'=>$request->input('id')])
-                ->with('danger','Entered Old Password Does not match with Current Password');
+                ->with('updatedanger','Entered Old Password Does not match with Current Password');
         }
         if($request->input('oldpassword'))
         $user = DB::table('users')->where(['id'=>$request->input('id')])->update(['username' => $request->input('username'),
-            'password' => bcrypt($request->input('password'))]);
+            'password' => bcrypt($request->input('password')),'email' => $request->input('email')]);
         if(Auth::user()->accesslevel=="admin"){
-            return redirect()->route('admindash')->with('success','Account Successfully Updated');
+            return redirect()->route('admindash')->with('adminupdatesuccess','Account Successfully Updated');
         }else{
-            return redirect()->route('customerdash')->with('success','Account Successfully Updated');
+            return redirect()->route('customerdash')->with('customerupdatesuccess','Account Successfully Updated');
         }
 
     }

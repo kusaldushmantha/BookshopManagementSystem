@@ -54,6 +54,25 @@
             </div>
         </div>
     @endif
+
+    @if(Session::has('customerpurchasesuccess'))
+        <script type="text/javascript">
+            swal("Purchase Successfull !", "Books successfully purchased. Thank you !", "success")
+        </script>
+    @endif
+
+    @if(Session::has('customerupdatesuccess'))
+        <script type="text/javascript">
+            swal("Update Successfull !", "Your Account Updated Successfully", "success")
+        </script>
+    @endif
+
+    @if(Session::has('updatedanger'))
+        <script type="text/javascript">
+            swal("Error in Update !", "Entered Old Password Does not match with Current Password", "error")
+        </script>
+    @endif
+
     @foreach(array_chunk($books->getCollection()->all(),3) as $bookChunks)
         <div class="row ">
             @foreach($bookChunks as $bookChunk)

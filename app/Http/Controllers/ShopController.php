@@ -88,7 +88,7 @@ class ShopController extends Controller
         $book = DB::table('books')->where(['id'=>$request->input('id')])->update(['price' => $request->input('price'),
         'quantity' => $request->input('qty')]);
 
-        return redirect()->route('viewstore')->with('success','Book Successfully Updated');
+        return redirect()->route('viewstore')->with('updatebooksuccess','Book Successfully Updated');
     }
 
     public function getAddtoCart(Request $request,$id){
@@ -199,15 +199,15 @@ class ShopController extends Controller
         Session::forget('cart');
 
         if(Auth::user()->accesslevel=='admin'){
-            return redirect()->route('admindash')->with('success','Books Purchased Successfully');
+            return redirect()->route('admindash')->with('adminpurchasesuccess','Books Purchased Successfully');
         }else{
-            return redirect()->route('customerdash')->with('success','Books Purchased Successfully');
+            return redirect()->route('customerdash')->with('customerpurchasesuccess','Books Purchased Successfully');
         }
     }
 
     public function getDeleteBook($id){
         DB::table('books')->where(['id'=>$id])->delete();
-        return redirect()->route('admindash')->with('success','Books Removed Successfully');
+        return redirect()->route('admindash');
     }
 
 }

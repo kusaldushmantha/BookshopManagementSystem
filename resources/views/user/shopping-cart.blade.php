@@ -17,7 +17,7 @@
 @section('styles')
     <style>
         body{
-            background-image: url('src/img/buybook2reOp.jpg');
+            background-image: url('src/img/bookquiz.jpg');
             background-repeat: repeat-y;
             background-size:1400px 1000px;
         }
@@ -29,7 +29,7 @@
     @if(Session::has('cart'))
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-6">
-                <ul class="list-group">
+                <ul class="list-group modifyList">
                     @foreach($books as $book)
                         <li class="list-group-item">
                             <label class=" badgeqty"> {{$book['qty']}} </label>
