@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\Cast\Object_;
 use Stripe\Stripe;
@@ -199,10 +200,31 @@ class ShopController extends Controller
         Session::forget('cart');
 
         if(Auth::user()->accesslevel=='admin'){
+            $this->getCheckoutEmail();
             return redirect()->route('admindash')->with('adminpurchasesuccess','Books Purchased Successfully');
         }else{
+            $this->getCheckoutEmail();
             return redirect()->route('customerdash')->with('customerpurchasesuccess','Books Purchased Successfully');
         }
+    }
+
+    public function getCheckoutEmail(){
+        $user = Auth::user();
+        $details=Order::orderBy('id', 'desc')->first();
+        $purchase = Auth::user()->orders;
+        $purchase->transform(function ($order,$key){
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        $countlast = (count($purchase));
+        $purchase = $purchase[$countlast-1];
+        Mail::send('emails.checkoutemail', ['user' => $user,'purchase'=>$purchase,'details'=>$details],
+            function ($m) use ($user) {
+            $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
+
+            $m->to($user->email)->subject('Thank You For Purchasing Books From TreeHouseBooks!');
+        });
+        return view('emails.checkoutemail');
     }
 
     public function getDeleteBook($id){
