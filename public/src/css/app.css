@@ -306,3 +306,23 @@
     font-size: 15px;
     font-weight: 700;
 }
+
+.generateReport{
+    position: relative;
+    right: -250px;
+    border: solid;
+    border-color: #387038;
+    margin-bottom: 10px;
+}
+
+.emailtitle{
+    position: relative;
+    top: 30px;
+    text-align: center;
+}
+
+.emailbody{
+    position: relative;
+    top: 40px;
+    text-align: center;
+}

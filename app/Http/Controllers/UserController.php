@@ -6,8 +6,9 @@ use App\Book;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -44,12 +45,24 @@ class UserController extends Controller
         $user->save();
         try{
             if(Auth::user()->accesslevel=='admin'){
+                $this->getsignupemail();
                 return redirect()->route('admindash')->with('adminsuccess','Account created Successfuly');
+
             }
         }catch (\Exception $e){
-            return redirect()->route('signin')->with('success','Account created Successfuly, Sign-in to Continue');
+            $this->getsignupemail();
+            return redirect()->route('signin')->with('customersuccess','Account created Successfuly, Sign-in to Continue');
         }
 
+    }
+
+    public function getsignupemail(){
+        $user = User::orderBy('id','desc')->first();
+        Mail::send('emails.signupemail', ['user' => $user], function ($m) use ($user) {
+            $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
+
+            $m->to($user->email)->subject('Thank You For Subscribing To TreeHouseBooks!');
+        });
     }
 
     public function getSignin(){

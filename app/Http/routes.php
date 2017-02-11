@@ -155,3 +155,8 @@ Route::post('/mypurchase',[
     'as'=>'postmypurchase',
     'middleware'=>'auth'
 ]);
+
+Route::get('/signupemail',[
+    'uses'=>'UserController@getsignupemail',
+    'as'=>'signupemail'
+]);

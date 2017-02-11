@@ -19,20 +19,27 @@
 
     <div class="row signIn">
         <div class="col-md-4 col-md-offset-4">
-            @if(Session::has('success'))
-                <div class="row">
-                        <div id="charge-message" class="alert alert-success">
-                            <strong>{{ Session::get('success') }}</strong>
-                        </div>
-                </div>
+
+            @if(Session::has('customersuccess'))
+                <script type="text/javascript">
+                    swal("Success!", "Account Successfully Created ! Please sign-in to continue", "success")
+                </script>
             @endif
+
             @if(count($errors)>0)
-                <div class="alert alert-danger">
-                    @foreach($errors->all() as $recievedError)
-                        <p>{{$recievedError}}</p>
-                    @endforeach
-                </div>
+                    <script type="text/javascript">
+                        swal({
+                                    title: "Invalid Entry !",
+                                    text: "Username / Password you entered is invalid",
+                                    type: "error",
+                                    showCancelButton: false,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "OK",
+                                    closeOnConfirm: false
+                                });
+                    </script>
             @endif
+
             <form action="{{ route('postsignin') }}" method="post" id="loginForm">
                 <div class="form-group">
                     <label for="username" class="loginLabels">Username : </label>

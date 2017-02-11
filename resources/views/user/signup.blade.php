@@ -37,9 +37,10 @@
             @if(count($errors)>0)
                 <div id="charge-message" class="alert alert-danger">
                     @foreach($errors->all() as $recievedError)
-                        <p>{{$recievedError}}</p>
+                        <p><strong>{{$recievedError}}</strong></p>
                     @endforeach
                 </div>
+
             @endif
 
             <form action="{{ route('postsignup') }}" method="post" id="signupForm" name="signupForm">
@@ -101,7 +102,7 @@
             $("#charge-message").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove();
             });
-        }, 3000);
+        }, 10000);
     </script>
 
      <script type="text/javascript">
