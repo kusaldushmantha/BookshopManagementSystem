@@ -34,6 +34,11 @@
             <h2 align="center">My Purchases</h2>
             <hr>
             <br>
+            @if(Session::has('confirmedsuccessdelete'))
+                <script type="text/javascript">
+                    swal("Delete Successfull !", "Order details successfully Deleted !", "success")
+                </script>
+            @endif
             @if($purchase->count()==0)
                 <div class="col-md-4 col-md-offset-4 adddone">
                     <div class="row">
@@ -57,12 +62,75 @@
                                     <strong>{{ $book['book']['title'] }}</strong>
                                 </li>
                             @endforeach
+                            <br>
+                            <strong> Order Status : {{ $p->order_status}} </strong>
                         </ul>
                     </div>
-                    <div class="panel-footer"><strong>Total Price : ${{ $p->cart->totalPrice }}</strong></div>
+                    <div class="panel-footer clearfix"><strong>Total Price : ${{ $p->cart->totalPrice }}</strong>
+                        @if($p->order_status=="Shipped")
+                            <a href="{{ route('confirmrecieve',['id'=>$p->id]) }}" type="button" class="btn btn-success pull-right confirmrecieved" aria-label="Left Align">
+                                Confirm Recieved
+                            </a>
+                        @elseif($p->order_status=="Confirmed")
+                            <a href="{{ route('deleteconfirmrecieve',['id'=>$p->id]) }}" type="button" class="btn btn-danger pull-right confirmdelete">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </a>
+                        @endif
+                    </div>
                 </div>
             @endforeach
             @endif
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ URL::to('src/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript">
+        $('.confirmrecieved').click(function (e) {
+            var href = $(this).attr('href');
+            swal({
+                        title: "Confirme Receival of Order !",
+                        text: "Are you sure You want to Confrim this Order ?",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Ship Order",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            window.location.href = href;
+                        }
+                    });
+
+            return false;
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('.confirmdelete').click(function (e) {
+            var href = $(this).attr('href');
+            swal({
+                        title: "Confirme Delete !",
+                        text: "Are you sure You want to delete this Order Information ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Delete Order",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            window.location.href = href;
+                        }
+                    });
+
+            return false;
+        });
+    </script>
 @endsection

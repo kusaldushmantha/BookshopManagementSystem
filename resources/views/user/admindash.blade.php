@@ -51,6 +51,7 @@
                 <li role="presentation"><a href="{{ route('addbook') }}">Add Book</a></li>
                 <li role="presentation"><a href="{{ route('signup') }}">Add Shopkeeper/Customer</a></li>
                 <li role="presentation"><a href="{{ route('viewstore') }}">View Store Status</a></li>
+                <li role="presentation"><a href="{{ route('vieworders') }}">View Order Status</a></li>
             </ul>
     </div>
     <br>

@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\User;
 use Illuminate\Http\Request;
-use DB;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -130,5 +128,45 @@ class UserController extends Controller
 
         return view('user.purchase',['purchase'=>$purchase]);
     }
+
+    public function getViewOrders(){
+        $orderDetails = DB::table('adminorders')->get();
+        return view('user.vieworders',['orderDetails'=>$orderDetails]);
+    }
+
+    public function getShipOrder($id){
+        $purchase = DB::table('orders')->where(['id'=>$id])->get();
+        $user_id = DB::table('orders')->where(['id'=>$id])->value('user_id');
+        $user = DB::table('users')->where(['id'=>$user_id])->first();
+        Mail::send('emails.shippedemail', ['user' => $user,'purchase'=>$purchase[0]], function ($m) use ($user) {
+            $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
+
+            $m->to($user->email)->subject('Order Shipped - TreeHouse Books');
+        });
+        DB::table('orders')->where(['id'=>$id])->update(['order_status' => 'Shipped']);
+        DB::table('adminorders')->where(['order_id'=>$id])->update(['order_status' => 'Shipped']);
+
+        return redirect()->route('vieworders')->with('shippedsuccess');
+
+    }
+
+    public function getConfirmationOnRecieved($id){
+        $orderDetails = DB::table('orders')->where(['id'=>$id])->get();
+        $user_id = DB::table('orders')->where(['id'=>$id])->value('user_id');
+        DB::table('orders')->where(['id'=>$id])->update(['order_status' => 'Confirmed']);
+        DB::table('adminorders')->where(['order_id'=>$id])->update(['order_status' => 'Confirmed']);
+        return redirect()->route('getmypurchase')->with('confirmedsuccess');
+    }
+
+    public function getDeleteConfirmRecieve($id){
+        DB::table('orders')->where(['id'=>$id])->delete();
+        return redirect()->route('getmypurchase')->with('confirmedsuccessdelete');
+    }
+
+    public function getAdminDeleteOrder($id){
+        DB::table('adminorders')->where(['id'=>$id])->delete();
+        return redirect()->route('vieworders')->with('confirmedsuccessdelete');
+    }
+
 
 }

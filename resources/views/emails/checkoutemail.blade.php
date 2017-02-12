@@ -32,8 +32,8 @@
             <div class="panel-footer"><strong>Total Price : ${{ $purchase->cart->totalPrice }}</strong></div>
         <hr>
         <br>
-        Your Order will be Delivered to the following Address :
-        <br>
+        Your Order Recieved and will be Delivered to the following Address :
+        <br><br>
         <strong>{{ $details->customername }}</strong>
         <br>
         <strong>{{ $details->address }}</strong>

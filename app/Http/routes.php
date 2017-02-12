@@ -160,3 +160,33 @@ Route::get('/signupemail',[
     'uses'=>'UserController@getsignupemail',
     'as'=>'signupemail'
 ]);
+
+Route::get('/vieworders',[
+    'uses'=>'UserController@getViewOrders',
+    'as'=>'vieworders',
+    'middleware'=>'auth'
+]);
+
+Route::get('/shiporder/{id}',[
+    'uses'=>'UserController@getShipOrder',
+    'as'=>'adminshiporder',
+    'middleware'=>'auth'
+]);
+
+Route::get('/deleteconfirmrecieve/{id}',[
+    'uses'=>'UserController@getDeleteConfirmRecieve',
+    'as'=>'deleteconfirmrecieve',
+    'middleware'=>'auth'
+]);
+
+Route::get('/admindeleteorder/{id}',[
+    'uses'=>'UserController@getAdminDeleteOrder',
+    'as'=>'admindeleteorder',
+    'middleware'=>'auth'
+]);
+
+Route::get('/confirmOrder/{id}',[
+    'uses'=>'UserController@getConfirmationOnRecieved',
+    'as'=>'confirmrecieve',
+    'middleware'=>'auth'
+]);

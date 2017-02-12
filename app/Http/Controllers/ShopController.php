@@ -193,6 +193,10 @@ class ShopController extends Controller
 
             Auth::user()->orders()->save($order);
 
+            $order_details = Order::orderBy('id', 'desc')->first();
+
+            DB::table('adminorders')->insert(['order_id'=>$order_details['id'],'cart'=>$order_details['cart']]);
+
         }catch(\Exception $e){
             return redirect()->route('checkout')->with('error',$e->getMessage());
         }

@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <label for="name">Cutomer Address: </label>
+                            <label for="name">Shipping Address: </label>
                             <input type="text" id="address" name="address" class="form-control" required>
                         </div>
                     </div>
