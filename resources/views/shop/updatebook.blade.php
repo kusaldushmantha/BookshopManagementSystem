@@ -45,7 +45,8 @@
                 </div>
                 <div class="form-group">
                     <label for="price" class="addbooklabel">Unit Price :</label>
-                    <input type="checkbox" name="currentprice" value="{{ $book->price }}">Keep Current Price<br>
+                    &nbsp;
+                    <input id="boxid" type="checkbox"><label for="boxid">Keep Current Price</label>
                     <input type="string" name="price" id="price" class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -68,8 +69,15 @@
 
 @section('scripts')
 
-    <script type="text/javascript">
-        
+    <script>
+        $('#boxid').click(function() {
+            if ($(this).is(':checked')) {
+                document.getElementById("price").value = "{{ $book->price }}";
+            }else{
+                document.getElementById("price").value = "";
+
+            }
+        });
     </script>
 
 
