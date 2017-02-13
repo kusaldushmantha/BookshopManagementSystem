@@ -195,7 +195,8 @@ class ShopController extends Controller
 
             $order_details = Order::orderBy('id', 'desc')->first();
 
-            DB::table('adminorders')->insert(['order_id'=>$order_details['id'],'cart'=>$order_details['cart']]);
+            DB::table('adminorders')->insert(['order_id'=>$order_details['id'],'cart'=>$order->cart,
+                'customername'=>$order->customername,'address'=>$order->address]);
 
         }catch(\Exception $e){
             return redirect()->route('checkout')->with('error',$e->getMessage());

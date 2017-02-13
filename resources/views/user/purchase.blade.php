@@ -34,7 +34,7 @@
             <h2 align="center">My Purchases</h2>
             <hr>
             <br>
-            @if(Session::has('confirmedsuccessdelete'))
+            @if(Session::has('purchasedelete'))
                 <script type="text/javascript">
                     swal("Delete Successfull !", "Order details successfully Deleted !", "success")
                 </script>
@@ -72,7 +72,7 @@
                                 Confirm Recieved
                             </a>
                         @elseif($p->order_status=="Confirmed")
-                            <a href="{{ route('deleteconfirmrecieve',['id'=>$p->id]) }}" type="button" class="btn btn-danger pull-right confirmdelete">
+                            <a href="{{ route('deleteThisPurchase',['id'=>$p->id]) }}" type="button" class="btn btn-danger pull-right confirmdelete">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
                         @endif
@@ -90,12 +90,12 @@
         $('.confirmrecieved').click(function (e) {
             var href = $(this).attr('href');
             swal({
-                        title: "Confirme Receival of Order !",
-                        text: "Are you sure You want to Confrim this Order ?",
+                        title: "Confirm Recieved !",
+                        text: "Are you sure you want to Confirm receival of this Order and Mark as Recieved ?",
                         type: "info",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Ship Order",
+                        confirmButtonText: "Confirm Order",
                         cancelButtonText: "Cancel",
                         closeOnConfirm: true,
                         closeOnCancel: true
@@ -114,8 +114,8 @@
         $('.confirmdelete').click(function (e) {
             var href = $(this).attr('href');
             swal({
-                        title: "Confirme Delete !",
-                        text: "Are you sure You want to delete this Order Information ?",
+                        title: "Confirm Delete !",
+                        text: "Are you sure you want to delete this Order Information ?",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",

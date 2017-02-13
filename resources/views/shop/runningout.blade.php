@@ -33,6 +33,15 @@
     </div>
     <br>
     <div class="row">
+        @if($books->count()==0)
+            <div class="col-md-4 col-md-offset-4 adddone">
+                <div class="row">
+                    <div id="message" class="alert alert-success">
+                        <strong>Book Store Status is Satisfiable</strong>
+                    </div>
+                </div>
+            </div>
+        @else
         <div class="col-md-8 col-md-offset-2">
 
             @foreach(array_chunk($books->getCollection()->all(),20) as $bookChunks)
@@ -65,7 +74,7 @@
             </div>
 
         </div>
-
+    @endif
     </div>
 @section("scripts")
     <script type="text/javascript">

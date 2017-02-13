@@ -158,14 +158,16 @@ class UserController extends Controller
         return redirect()->route('getmypurchase')->with('confirmedsuccess');
     }
 
-    public function getDeleteConfirmRecieve($id){
-        DB::table('orders')->where(['id'=>$id])->delete();
-        return redirect()->route('getmypurchase')->with('confirmedsuccessdelete');
+    //$p->id = OrderId in Orders Table
+
+    public function getDeleteThisPurchase($orderId){
+        DB::table('orders')->where(['id'=>$orderId])->delete();
+        return redirect()->route('getmypurchase')->with('purchasedelete');
     }
 
-    public function getAdminDeleteOrder($id){
-        DB::table('adminorders')->where(['id'=>$id])->delete();
-        return redirect()->route('vieworders')->with('confirmedsuccessdelete');
+    public function getDeleteAdminOrder($orderId){
+        DB::table('adminorders')->where(['id'=>$orderId])->delete();
+        return redirect()->route('vieworders')->with('deletesuccess');
     }
 
 

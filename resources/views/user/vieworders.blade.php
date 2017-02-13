@@ -31,6 +31,12 @@
         </script>
     @endif
 
+    @if(Session::has('deletesuccess'))
+        <script type="text/javascript">
+            swal("Delete Successfull !", "Order details successfully Deleted.", "success")
+        </script>
+    @endif
+
     <div class="panel panel-default panelBorder2">
         <div class="panel-heading ordersCustomer"><strong>Orders Placed By Customers</strong></div>
         <table class="table">
@@ -47,13 +53,13 @@
             <tbody>
 
             @foreach($orderDetails as $od)
-                @php($cartDetails = Illuminate\Support\Facades\DB::table('orders')->where(['id'=>$od->order_id])->first())
-
+                @php($cartDetails = DB::table('adminorders')->where(['order_id'=>$od->order_id])->first())
                 <tr>
                     <td class="col-md-1">{{$cartDetails->id}}</td>
                     <td class="col-md-2">{{$cartDetails->customername}}</td>
                     <td class="col-md-4">{{$cartDetails->address}}</td>
                     @php($cart = unserialize($cartDetails->cart))
+
                     <td class="col-md-4">
                     @foreach($cart->books as $book)
                         {{$book['book']['title']}} - {{$book['qty']}}
@@ -66,9 +72,9 @@
                             <a type="button" class="btn btn-success shipthis" href="{{route('adminshiporder',['id'=>$od->order_id])}}">Ship Order</a>
                     @elseif($od->order_status=='Confirmed')
                             <a class="btn btn-success" disabled>Recieval Confirmed </a>
-                            <a class="btn btn-danger deleteorder" {{route('admindeleteorder',['id'=>$od->order_id])}} >Delete Order</a>
+                            <a class="btn btn-danger deletethis" href="{{ route('deleteadminorder',['id'=>$od->order_id]) }}" >Delete Order</a>
                         @else
-                        <a class="btn btn-info" disabled>Pending Confirmation</a><a class="btn btn-danger deleteorder" {{route('adminshiporder',['id'=>$od->order_id])}}>Delete Order</a>
+                        <a class="btn btn-info " disabled>Pending Confirmation</a><a class="btn btn-danger deletethis" href="#">Delete Order</a>
                     @endif
                     </td>
                 </tr>
@@ -104,4 +110,29 @@
             return false;
         });
     </script>
+
+    <script type="text/javascript">
+        $('.deletethis').click(function (e) {
+            var href = $(this).attr('href');
+            swal({
+                        title: "Delete Order !",
+                        text: "Are you sure You want to Delete this Order ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Delete Order",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            window.location.href = href;
+                        }
+                    });
+
+            return false;
+        });
+    </script>
+
 @endsection

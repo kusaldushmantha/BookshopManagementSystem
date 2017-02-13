@@ -45,6 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label for="price" class="addbooklabel">Unit Price :</label>
+                    <input type="checkbox" name="currentprice" value="{{ $book->price }}">Keep Current Price<br>
                     <input type="string" name="price" id="price" class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -66,6 +67,12 @@
 @endsection
 
 @section('scripts')
+
+    <script type="text/javascript">
+        
+    </script>
+
+
     <script type="text/javascript">
         function validateNumbers(inputnum,inputString) {
             var num = /^[0-9]+$/;

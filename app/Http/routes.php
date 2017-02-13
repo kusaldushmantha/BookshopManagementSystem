@@ -173,20 +173,20 @@ Route::get('/shiporder/{id}',[
     'middleware'=>'auth'
 ]);
 
-Route::get('/deleteconfirmrecieve/{id}',[
-    'uses'=>'UserController@getDeleteConfirmRecieve',
-    'as'=>'deleteconfirmrecieve',
-    'middleware'=>'auth'
-]);
-
-Route::get('/admindeleteorder/{id}',[
-    'uses'=>'UserController@getAdminDeleteOrder',
-    'as'=>'admindeleteorder',
-    'middleware'=>'auth'
-]);
-
 Route::get('/confirmOrder/{id}',[
     'uses'=>'UserController@getConfirmationOnRecieved',
     'as'=>'confirmrecieve',
+    'middleware'=>'auth'
+]);
+
+Route::get('/deleteThisPurchase/{id}',[
+    'uses'=>'UserController@getDeleteThisPurchase',
+    'as'=>'deleteThisPurchase',
+    'middleware'=> 'auth'
+]);
+
+Route::get('/deleteAdminOrder/{id}',[
+    'uses'=>'UserController@getDeleteAdminOrder',
+    'as'=>'deleteadminorder',
     'middleware'=>'auth'
 ]);
