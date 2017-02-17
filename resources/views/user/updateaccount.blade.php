@@ -21,10 +21,9 @@
 @section('styles')
     <style>
         body{
-            background-image: url('src/img/bookstackreOp.jpg');
+            background-image: url('/public/src/img/bookstackreOp.jpg');
             background-repeat: no-repeat;
             background-size:1400px 1000px;
-            background-opacity:0.5;
         }
     </style>
 @endsection

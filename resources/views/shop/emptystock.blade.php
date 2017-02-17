@@ -80,6 +80,33 @@
 @endsection
 
 @section("scripts")
+
+    <script src="{{ URL::to('src/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript">
+        $('.delete_book').click(function (e) {
+            var href = $(this).attr('href');
+            swal({
+                        title: "Remove Book ?",
+                        text: "You are about to remove the selected book.This action cannot be reversed.",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Remove Book",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            window.location.href = href;
+                        }
+                    });
+
+            return false;
+        });
+    </script>
+
+
     <script type="text/javascript">
         window.setTimeout(function() {
             $("#charge-message").fadeTo(500, 0).slideUp(500, function(){

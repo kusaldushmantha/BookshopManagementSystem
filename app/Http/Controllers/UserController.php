@@ -37,7 +37,8 @@ class UserController extends Controller
             'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
             'email' => $request->input('email'),
-            'accesslevel' => $request->input('accesslevel')
+            'accesslevel' => $request->input('accesslevel'),
+            'subscribed_on'=>date("Y-m-d")
         ]);
 
         $user->save();

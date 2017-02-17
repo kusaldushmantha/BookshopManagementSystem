@@ -95,7 +95,7 @@
                         text: "Are you sure You want to Ship this Order ?",
                         type: "info",
                         showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
+                        confirmButtonColor: "#62c462",
                         confirmButtonText: "Ship Order",
                         cancelButtonText: "Cancel",
                         closeOnConfirm: true,

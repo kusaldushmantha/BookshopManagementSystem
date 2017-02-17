@@ -94,7 +94,7 @@
                         text: "Are you sure you want to Confirm receival of this Order and Mark as Recieved ?",
                         type: "info",
                         showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
+                        confirmButtonColor: "#62c462",
                         confirmButtonText: "Confirm Order",
                         cancelButtonText: "Cancel",
                         closeOnConfirm: true,

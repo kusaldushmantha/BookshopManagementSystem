@@ -6,6 +6,7 @@ use App\Book;
 use App\Order;
 use App\ShoppingCart;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -235,6 +236,97 @@ class ShopController extends Controller
     public function getDeleteBook($id){
         DB::table('books')->where(['id'=>$id])->delete();
         return redirect()->route('admindash');
+    }
+
+    public function getReport(){
+        $today = Carbon::now();
+        $curent = Carbon::now()->toDateTimeString();
+        $prevMonth = $today->subMonth();
+        $date = Carbon::now()->toDateString();
+        $prevMonthDate = $prevMonth->toDateString();
+
+        $subscribedUsers = DB::table('users')->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->get();
+
+        $orders = DB::table('orders')->where([['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->get();
+
+        $bookArray = array();
+
+        $totalIncome = 0;
+
+
+        foreach ($orders as $order){
+            $cart = unserialize($order->cart);
+            $totalIncome = $totalIncome+$cart->totalPrice;
+            foreach ($cart->books as $book){
+                if(array_key_exists($book['book']['title'],$bookArray)){
+                    $quantity = $bookArray[$book['book']['title']][0] + 1;
+                    $bookArray[$book['book']['title']][0] = $quantity;
+                    $price = $bookArray[$book['book']['title']][1];
+                    $bookArray[$book['book']['title']][1] = $price + $bookArray[$book['book']['title']][1];
+                }else{
+                    $unitPrice = $book['book']['price'];
+                    $bookArray[$book['book']['title']] = [1,$book['book']['price'],$unitPrice];
+                    //dd($bookArray[$book['book']['title']][0]);
+                }
+
+            }
+        }
+
+        return view('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
+        ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome]);
+    }
+
+    public function getReportEmail(){
+
+        $today = Carbon::now();
+        $curent = Carbon::now()->toDateTimeString();
+        $prevMonth = $today->subMonth();
+        $date = Carbon::now()->toDateString();
+        $prevMonthDate = $prevMonth->toDateString();
+
+        $subscribedUsers = DB::table('users')->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->get();
+
+        $orders = DB::table('orders')->where([['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->get();
+
+        $bookArray = array();
+
+        $totalIncome = 0;
+
+
+        foreach ($orders as $order){
+            $cart = unserialize($order->cart);
+            $totalIncome = $totalIncome+$cart->totalPrice;
+            foreach ($cart->books as $book){
+                if(array_key_exists($book['book']['title'],$bookArray)){
+                    $quantity = $bookArray[$book['book']['title']][0] + 1;
+                    $bookArray[$book['book']['title']][0] = $quantity;
+                    $price = $bookArray[$book['book']['title']][1];
+                    $bookArray[$book['book']['title']][1] = $price + $bookArray[$book['book']['title']][1];
+                }else{
+                    $unitPrice = $book['book']['price'];
+                    $bookArray[$book['book']['title']] = [1,$book['book']['price'],$unitPrice];
+                    //dd($bookArray[$book['book']['title']][0]);
+                }
+
+            }
+        }
+
+        $user = Auth::user();
+        Mail::send('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
+            ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome],
+            function ($m) use ($user) {
+                $date = Carbon::now()->toDateString();
+                $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
+
+                $m->to($user->email)->subject('Monthly Report - '.$date);
+            });
+
+        $book = Book::paginate(9);
+        return view('user.admindash',['books'=>$book])->with('emailSuccess');
     }
 
 }

@@ -52,9 +52,16 @@
                 <li role="presentation"><a href="{{ route('signup') }}">Add Shopkeeper/Customer</a></li>
                 <li role="presentation"><a href="{{ route('viewstore') }}">View Store Status</a></li>
                 <li role="presentation"><a href="{{ route('vieworders') }}">View Order Status</a></li>
+                <li role="presentation"><a href="{{ route('getreport') }}">View Overall Report</a></li>
             </ul>
     </div>
     <br>
+
+    @if(Session::has('emailSuccess'))
+        <script type="text/javascript">
+            swal("Monthly Report Sent !", "Monthly report successfully sent to your email account", "success")
+        </script>
+    @endif
 
     @if(Session::has('success'))
         <div class="row adddone">

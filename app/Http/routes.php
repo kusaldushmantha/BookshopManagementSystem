@@ -190,3 +190,15 @@ Route::get('/deleteAdminOrder/{id}',[
     'as'=>'deleteadminorder',
     'middleware'=>'auth'
 ]);
+
+Route::get('/report',[
+    'uses'=> 'ShopController@getReport',
+    'as'=>'getreport',
+    'middleware'=>'auth'
+]);
+
+Route::get('/reportEmail',[
+    'uses'=>'ShopController@getReportEmail',
+    'as'=>'reportemail',
+    'middleware'=>'auth'
+]);
