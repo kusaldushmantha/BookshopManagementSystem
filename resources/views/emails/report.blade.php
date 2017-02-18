@@ -1,18 +1,7 @@
-@extends('layout.master')
 
-@section('header')
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('admindash') }}"><i class="fa fa-home" aria-hidden="true">
 
-                    </i> TreeHouse Books</a>
-            </div>
-        </div>
-    </nav>
-@endsection
 
-@section('body')
+<body>
 
         <div class="row">
             <div class="col-md-3">
@@ -71,20 +60,38 @@
         <div class="row">
 
         </div>
-<hr>
-    <div class="row">
-        <label>Customer Subscriptions within this time period : {{ sizeof($subscribedUsers) }}</label>
-    </div>
-<hr>
+        <div class="panel panel-default col-md-6">
+            <!-- Default panel contents -->
+            <div class="panel-heading text-center"><strong>Customer Subscription within this Time Period</strong></div>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                <tr>
+                    <th class="col-md-4 ">Subscribed Date</th>
+                    <th class="col-md-1 text-center">Number of Subscriptions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @php($count =0)
+                @foreach ($subscribedUsers as $subscribedUser)
+
+                    <tr>
+                        <td class="col-md-4 ">{{ $subscribedUser->subscribed_on }}</td>
+                        <td class="col-md-1 text-center">{{ $subscribedUser->total }}</td>
+                        <div class="hidden" >@php($count = $count+$subscribedUser->total)</div>
+
+                    </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
+            <div class="panel-footer text-center"><strong>Total Subscriptions : {{ $count }}</strong></div>
+        </div>
+
         <div class="row">
 
         </div>
-    <div>
-        <a href="{{ route('reportemail') }}" type="button" class="btn btn-success" >Get Report</a>
-    </div>
 
-@endsection
-
-@section('scripts')
-
-@endsection
+</body>

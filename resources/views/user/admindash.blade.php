@@ -57,12 +57,6 @@
     </div>
     <br>
 
-    @if(Session::has('emailSuccess'))
-        <script type="text/javascript">
-            swal("Monthly Report Sent !", "Monthly report successfully sent to your email account", "success")
-        </script>
-    @endif
-
     @if(Session::has('success'))
         <div class="row adddone">
             <div id="charge-message" class="alert alert-success">

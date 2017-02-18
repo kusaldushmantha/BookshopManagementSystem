@@ -357,3 +357,11 @@
 .reportTitle{
     text-decoration: underline;
 }
+
+.getReportModify{
+    position: relative;
+    margin-bottom: 8px;
+    border: solid;
+    border-color: #387038;
+    left: 230px;
+}

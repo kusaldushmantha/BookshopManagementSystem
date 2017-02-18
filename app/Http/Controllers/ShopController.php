@@ -7,12 +7,14 @@ use App\Order;
 use App\ShoppingCart;
 use App\User;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use PhpParser\Node\Expr\Cast\Object_;
 use Stripe\Stripe;
 
@@ -245,8 +247,10 @@ class ShopController extends Controller
         $date = Carbon::now()->toDateString();
         $prevMonthDate = $prevMonth->toDateString();
 
-        $subscribedUsers = DB::table('users')->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
-            ->get();
+        $subscribedUsers = DB::table('users')->select('subscribed_on',DB::raw('count(*) as total'))
+            ->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->groupBy('subscribed_on')->get();
+
 
         $orders = DB::table('orders')->where([['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
             ->get();
@@ -274,7 +278,7 @@ class ShopController extends Controller
             }
         }
 
-        return view('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
+        return view('shop.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
         ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome]);
     }
 
@@ -286,8 +290,12 @@ class ShopController extends Controller
         $date = Carbon::now()->toDateString();
         $prevMonthDate = $prevMonth->toDateString();
 
-        $subscribedUsers = DB::table('users')->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
-            ->get();
+        /*$subscribedUsers = DB::table('users')->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
+            ->get();*/
+        //$subscribedUsers = DB::statement('select * from users where accesslevel like "customer"' and);
+        $subscribedUsers = DB::table('users')->select('subscribed_on',DB::raw('count(*) as total'))->where([['accesslevel','=','customer'],['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])->groupBy('subscribed_on')->get();
+        //dd($subscribedUsers);
+        //($subscribedUsers[0],$subscribedUsers[1]);
 
         $orders = DB::table('orders')->where([['created_at','<=', $curent],['created_at','>',$prevMonth->toDateTimeString()]])
             ->get();
@@ -314,19 +322,33 @@ class ShopController extends Controller
 
             }
         }
+        /*
+                $user = Auth::user();
+                Mail::send('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
+                    ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome],
+                    function ($m) use ($user) {
+                        $date = Carbon::now()->toDateString();
+                        $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
 
-        $user = Auth::user();
-        Mail::send('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
-            ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome],
-            function ($m) use ($user) {
-                $date = Carbon::now()->toDateString();
-                $m->from('treehousebookstore3@gmail.com', 'TreeHouse Books');
+                        $m->to($user->email)->subject('Monthly Report - '.$date);
+                    });*/
 
-                $m->to($user->email)->subject('Monthly Report - '.$date);
-            });
 
-        $book = Book::paginate(9);
-        return view('user.admindash',['books'=>$book])->with('emailSuccess');
+        // reference the Dompdf namespace
+
+
+// instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $html = View::make('emails.report',['subscribedUsers'=>$subscribedUsers,'bookArray'=>$bookArray,'date'=>$date
+            ,'prevMonthDate'=>$prevMonthDate,'totalIncome'=>$totalIncome])->render();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('a4', 'portrait');
+        $dompdf->render();
+
+// Render the HTML as PDF
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
     }
 
 }
