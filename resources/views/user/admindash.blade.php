@@ -12,6 +12,13 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <form action="{{ route('searchbook') }}" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" id="search " name="search" class="form-control" placeholder="Enter Book Title or Author">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                        {{csrf_field()}}
+                    </form>
                     <li><a href="{{ route('shoppingcart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             Shopping Cart <span class="badge">{{Session::has('cart') ?
                             Session::get('cart')->totalQty :''}}</span></a></li>
@@ -86,6 +93,12 @@
     @if(Session::has('updatedanger'))
         <script type="text/javascript">
             swal("Error in Update", "Entered Old Password Does not match with Current Password", "error")
+        </script>
+    @endif
+
+    @if(Session::has('noresult'))
+        <script type="text/javascript">
+            swal("No Books Found !!!", "Unfortunately your Search returned no Books. Try altering the search or Browse for other Books", "info")
         </script>
     @endif
 

@@ -94,8 +94,7 @@ Route::get('/runningoutstocks',[
 
 Route::get('/customerdash',[
     'uses'=>'UserController@getCustomerDash',
-    'as'=>'customerdash',
-    'middleware'=>'auth'
+    'as'=>'customerdash'
 ]);
 
 Route::get('/shoppingcart',[
@@ -201,4 +200,9 @@ Route::get('/reportEmail',[
     'uses'=>'ShopController@getReportEmail',
     'as'=>'reportemail',
     'middleware'=>'auth'
+]);
+
+Route::get('/searchbook',[
+    'uses'=>'ShopController@getSearchBook',
+    'as'=>'searchbook',
 ]);

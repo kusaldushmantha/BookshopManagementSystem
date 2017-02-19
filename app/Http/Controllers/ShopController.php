@@ -105,11 +105,16 @@ class ShopController extends Controller
         $shoppingCart->addBook($book,$book->id);
 
         Session::put('cart',$shoppingCart);
-        if(Auth::user()->accesslevel=="customer"){
-            return redirect()->route('customerdash')->with('success', $book->title.' Added to Cart');
+        if(Auth::user()){
+            if(Auth::user()->accesslevel=="customer"){
+                return redirect()->back()->with('success', $book->title.' Added to Cart');
+            }else if(Auth::user()->accesslevel=="admin"){
+                return redirect()->back()->with('success', $book->title.' Added to Cart');
+            }
         }else{
-            return redirect()->route('admindash')->with('success', $book->title.' Added to Cart');
+            return redirect()->back()->with('success', $book->title.' Added to Cart');
         }
+
 
     }
 
@@ -352,6 +357,36 @@ class ShopController extends Controller
 
 // Output the generated PDF to Browser
         $dompdf->stream();
+    }
+
+    public function getSearchBook(Request $request){
+        if(Auth::user()){
+            if(Auth::user()->accesslevel=="admin"){
+                $searchInput = $request->input('search');
+                $books = DB::table('books')->where(['title'=>$searchInput])->orWhere(['author'=>$searchInput])->paginate(15);
+                if(count($books) == 0){
+                    return redirect()->route('admindash')->with('noresult','no books found');
+                }else{
+                    return view('user.admindash',['books'=>$books]);
+                }
+            }else{
+                $searchInput = $request->input('search');
+                $books = DB::table('books')->where(['title'=>$searchInput])->orWhere(['author'=>$searchInput])->paginate(15);
+                if(count($books) == 0){
+                    return redirect()->route('customerdash')->with('noresult','no books found');
+                }else{
+                    return view('user.customerdash',['books'=>$books]);
+                }
+            }
+        }else{
+            $searchInput = $request->input('search');
+            $books = DB::table('books')->where(['title'=>$searchInput])->orWhere(['author'=>$searchInput])->paginate(15);
+            if(count($books) == 0){
+                return redirect()->route('customerdash')->with('noresult','no books found');
+            }else{
+                return view('user.customerdash',['books'=>$books]);
+            }
+        }
     }
 
 }
