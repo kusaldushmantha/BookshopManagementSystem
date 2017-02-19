@@ -89,8 +89,11 @@ class ShopController extends Controller
 
         $date = new DateTime();
 
+        $currentQty = DB::table('books')->where(['id'=>$request->input('id')])->value('quantity');
+        $newQty = $currentQty+$request->input('qty');
+
         $book = DB::table('books')->where(['id'=>$request->input('id')])->update(['price' => $request->input('price'),
-        'quantity' => $request->input('qty')]);
+        'quantity' => $newQty]);
 
         return redirect()->route('viewstore')->with('updatebooksuccess','Book Successfully Updated');
     }

@@ -51,7 +51,9 @@
                     <input type="string" name="price" id="price" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="quantity" class="addbooklabel">Quantity :</label>
+                    <label for="quantity" class="addbooklabel">Number of new Books  :</label>
+                    <br>
+                    <label for="currentqty" class="addbooklabel">Number of Books Available in Stocks : {{ $book->quantity }} </label>
                     <input type="string" name="qty" id="qty" class="form-control" required>
                 </div>
                 <div class="form-group">
