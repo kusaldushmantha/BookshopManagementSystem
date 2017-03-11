@@ -167,7 +167,7 @@ class UserController extends Controller
     }
 
     public function getDeleteAdminOrder($orderId){
-        DB::table('adminorders')->where(['id'=>$orderId])->delete();
+        DB::table('adminorders')->where(['order_id'=>$orderId])->delete();
         return redirect()->route('vieworders')->with('deletesuccess');
     }
 

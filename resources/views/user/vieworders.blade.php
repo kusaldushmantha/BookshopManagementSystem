@@ -74,7 +74,7 @@
                             <a class="btn btn-success" disabled>Recieval Confirmed </a>
                             <a class="btn btn-danger deletethis" href="{{ route('deleteadminorder',['id'=>$od->order_id]) }}" >Delete Order</a>
                         @else
-                        <a class="btn btn-info " disabled>Pending Confirmation</a><a class="btn btn-danger deletethis" href="#">Delete Order</a>
+                        <a class="btn btn-info " disabled>Pending Confirmation</a><a class="btn btn-danger deletethis" href="{{ route('deleteadminorder',['id'=>$od->order_id]) }}">Delete Order</a>
                     @endif
                     </td>
                 </tr>

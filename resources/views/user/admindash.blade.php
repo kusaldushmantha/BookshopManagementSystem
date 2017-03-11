@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('header')
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navModify">
         <div class="container-fluid">
             <div class="navbar-header">
                 @if(Auth::user()->accesslevel == "customer")

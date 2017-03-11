@@ -21,7 +21,7 @@
 @section('styles')
     <style>
         body{
-            background-image: url('/public/src/img/bookstackreOp.jpg');
+            background-image: url('src/img/openBookreOp.jpg');
             background-repeat: no-repeat;
             background-size:1400px 1000px;
         }
@@ -41,7 +41,6 @@
                     </div>
                 @endif
 
-
                     @if(Session::has('success'))
                         <div class="row adddone">
                             <div id="charge-message" class="alert alert-success">
@@ -54,6 +53,14 @@
                         <div class="row adddone">
                             <div id="charge-message" class="alert alert-danger">
                                 <strong>{{ Session::get('danger') }}</strong>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(Session::has('updatedanger'))
+                        <div class="row adddone">
+                            <div id="charge-message" class="alert alert-danger">
+                                <strong>{{ Session::get('updatedanger')}}</strong>
                             </div>
                         </div>
                     @endif
